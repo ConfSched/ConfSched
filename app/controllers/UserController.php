@@ -2,6 +2,10 @@
 
 class UserController extends \BaseController {
 
+	public function register($id) {
+		//
+	} 
+
 	/**
 	 * Display a listing of the resource.
 	 * GET /user

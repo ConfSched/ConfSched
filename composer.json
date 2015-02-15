@@ -9,7 +9,7 @@
 		"cboden/ratchet": "0.3.*",
 		"jenssegers/date": "~2.0",
 		"maatwebsite/excel": "~1.2.1",
-		"dlcrush/laravel-dbug": "dev-master#dc8c91e81c1ae6cefd1b4f121504ca84bb0b633e"
+		"dlcrush/laravel-dbug": "~1.1.0"
 	},
 	"autoload": {
 		"classmap": [

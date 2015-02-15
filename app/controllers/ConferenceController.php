@@ -603,4 +603,17 @@ class ConferenceController extends \BaseController {
 		}
 	}
 
+	public function alertUsersToCreateAccounts() {
+            	$authors = Authors::all();
+
+            	foreach($authors as $author) {
+            		//DBug::DBug($author->email);
+            		Mail::send('emails.registration', compact('author'), function($message) use ($author)
+			{
+				$message->to($author->email, $author->name)->subject('ConfSched Registration');
+				$message->from('noreply@cs-sr.academic.roanoke.edu', 'ConfSched');
+			});
+            	}
+	}
+
 }

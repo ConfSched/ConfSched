@@ -16,6 +16,9 @@ Route::get('/', function()
 	return View::make('index');
 });
 
+Route::get('register/{id}', 'UserController@register');
+Route::get('sendEmailsAuthors', 'ConferenceController@alertUsersToCreateAccounts');
+
 Route::get('signup', 'LoginController@showSignUpForm');
 Route::get('login', 'LoginController@showLoginForm');
 Route::get('logout', 'LoginController@logout');
