@@ -576,7 +576,7 @@ class ConferenceController extends \BaseController {
 			return Redirect::action('ConferenceController@showAddAuthorMapPage')->withInput()->withErrors($validator);
 		}
 
-		AuthorMap::truncate();
+		//AuthorMap::truncate();
 
 		foreach(Input::get('author') as $author) {
 			if ($author != Input::get('author1') && $author != '') {
@@ -597,6 +597,11 @@ class ConferenceController extends \BaseController {
 
 				foreach(AuthorSessionConstraint::where('author_id', $author)->get() as $authorsession) {
 					$authorsession->author_id = Input::get('author1');
+					$authorsession->save();
+				}
+
+				foreach(User::where('author_id', $author)->get() as $user) {
+					$user->author_id = Input::get('author1');
 					$authorsession->save();
 				}
 			}
