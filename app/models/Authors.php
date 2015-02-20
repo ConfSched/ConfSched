@@ -1,6 +1,11 @@
 <?php
 
+use Illuminate\Database\Eloquent\SoftDeletingTrait;
+
 class Authors extends \Eloquent {
+
+	use SoftDeletingTrait;
+	
 	protected $fillable = [];
 	protected $connection = 'confsched';
 	protected $table = 'authors';

@@ -604,16 +604,26 @@ class ConferenceController extends \BaseController {
 					$user->author_id = Input::get('author1');
 					$authorsession->save();
 				}
+
+				Authors::find($author)->delete(); // soft delete author
 			}
 		}
+
+		return Redirect::action('ConferenceController@showConstraintsPage');
 	}
 
 	public function alertUsersToCreateAccounts() {
+
+		User::truncate();
+		AuthorMap::truncate();
+
 		//$authors = Authors::all();
 		$committeemembers = Reviewer::all();
 		$author_committee_members = Authors::whereIn('email', $committeemembers->lists('email'))->get();
 		//$committeemembers = Reviewer::whereIn('email', $authors->lists('email'))->get();
 		
+		//DBug::DBug($author_committee_members->toArray(), true);
+
 		$conference = DB::connection('openconf')->select("SELECT value FROM config WHERE setting =  'OC_confNameFull'");
             	$conference = $conference[0]->value;
 
@@ -626,7 +636,7 @@ class ConferenceController extends \BaseController {
 			});
 		}
 
-            	$authors = Authors::whereNotIn('email', $author_committee_members->lists('email'));
+            	$authors = Authors::whereNotIn('email', $author_committee_members->lists('email'))->get();
 
             	foreach($authors as $author) {
             		//DBug::DBug($author->email);
