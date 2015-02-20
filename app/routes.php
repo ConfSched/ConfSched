@@ -16,7 +16,8 @@ Route::get('/', function()
 	return View::make('index');
 });
 
-Route::get('register/{id}', 'UserController@register');
+Route::get('register', 'UserController@register');
+Route::post('register', 'UserController@processRegister');
 Route::get('sendEmailsAuthors', 'ConferenceController@alertUsersToCreateAccounts');
 
 Route::get('signup', 'LoginController@showSignUpForm');

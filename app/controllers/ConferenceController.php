@@ -604,15 +604,43 @@ class ConferenceController extends \BaseController {
 	}
 
 	public function alertUsersToCreateAccounts() {
-            	$authors = Authors::all();
+		//$authors = Authors::all();
+		$committeemembers = Reviewer::all();
+		$author_committee_members = Authors::whereIn('email', $committeemembers->lists('email'))->get();
+		//$committeemembers = Reviewer::whereIn('email', $authors->lists('email'))->get();
+		
+		$conference = DB::connection('openconf')->select("SELECT value FROM config WHERE setting =  'OC_confNameFull'");
+            	$conference = $conference[0]->value;
 
-            	foreach($authors as $author) {
-            		//DBug::DBug($author->email);
-            		Mail::send('emails.registration', compact('author'), function($message) use ($author)
+		foreach($author_committee_members as $author) {
+			$member = Reviewer::where('email', $author->email)->first();
+			Mail::send('emails.registration.both', compact('author', 'member', 'conference'), function($message) use ($author)
 			{
 				$message->to($author->email, $author->name)->subject('ConfSched Registration');
 				$message->from('noreply@cs-sr.academic.roanoke.edu', 'ConfSched');
 			});
+		}
+
+            	$authors = Authors::whereNotIn('email', $author_committee_members->lists('email'));
+
+            	foreach($authors as $author) {
+            		//DBug::DBug($author->email);
+            		
+            		Mail::send('emails.registration.author', compact('author', 'conference'), function($message) use ($author)
+			{
+				$message->to($author->email, $author->name)->subject('ConfSched Registration');
+				$message->from('noreply@cs-sr.academic.roanoke.edu', 'ConfSched');
+			});
+            	}
+
+            	$committeemembers = Reviewer::where('onprogramcommittee', 'T')->whereNotIn('email', $author_committee_members->lists('email'))->get();
+
+            	foreach($committeemembers as $member) {
+            		Mail::send('emails.registration.committee', compact('member', 'conference'), function($message) use ($member)
+            		{
+            			$message->to($member->email, $member->name_first . ' ' . $member->name_last)->subject('ConfSched Registration');
+            			$message->from('noreply@cs-sr.academic.roanoke.edu', 'ConfSched');
+            		});
             	}
 	}
 

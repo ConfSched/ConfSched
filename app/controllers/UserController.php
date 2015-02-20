@@ -2,9 +2,26 @@
 
 class UserController extends \BaseController {
 
-	public function register($id) {
-		//
-	} 
+	public function register() {
+
+		$author = null;
+		$member = null;
+
+		if (Input::has('authorid')) {
+			$author = Authors::find(Input::get('authorid'));
+		}
+
+		if (Input::has('committeeid')) {
+			$member = Reviewer::find(Input::get('committeeid'));
+		}
+		
+
+		return View::make('register', compact('author', 'member'));
+	}
+
+	public function processRegister() {
+		DBug::DBug(Input::all(), true);
+	}
 
 	/**
 	 * Display a listing of the resource.
