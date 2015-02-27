@@ -13,7 +13,7 @@ class ConferenceController extends \BaseController {
 
 	/**
 	 * shows the process page
-	 * 
+	 *
 	 * @return Response
 	 */
 	public function showProcessPage() {
@@ -22,7 +22,7 @@ class ConferenceController extends \BaseController {
 
 	/**
 	 * Marks OpenConf stage as complete
-	 * 
+	 *
 	 * @return Response
 	 */
 	public function completeOpenConf() {
@@ -35,7 +35,7 @@ class ConferenceController extends \BaseController {
 
 	/**
 	 * Shows the committee sourcing page
-	 * 
+	 *
 	 * @return Response
 	 */
 	public function showCommitteeSourcingPage() {
@@ -56,7 +56,7 @@ class ConferenceController extends \BaseController {
 
 	/**
 	 * Shows the Add Category Form
-	 * 
+	 *
 	 * @param  int $id the id of the topic that the category should be added to
 	 * @return Response
 	 */
@@ -66,7 +66,7 @@ class ConferenceController extends \BaseController {
 
 	/**
 	 * Adds a new category to the specified topic
-	 * 
+	 *
 	 * @param int $id the id of the topic that the category should be added to
 	 * @return Response
 	 */
@@ -88,7 +88,7 @@ class ConferenceController extends \BaseController {
 
 	/**
 	 * Removes a category
-	 * 
+	 *
 	 * @param  int $id the id of the category to remove
 	 * @return Response
 	 */
@@ -172,7 +172,7 @@ class ConferenceController extends \BaseController {
 		// }
 
 		// var_dump($paper_topics_list);
-		
+
 		$first_paper_id = Author::where('email', Auth::user()->email)->first()->paperid;
 
 		$paper_id = $first_paper_id;
@@ -217,7 +217,7 @@ class ConferenceController extends \BaseController {
 
 	public function showAuthorSourcingPage(){
 		$papers = Paper::with('topics')->get();
-		$all_papers = Paper::all();
+		// $all_papers = Paper::all();
 
 		// $paper_topics_list = array();
 
@@ -226,35 +226,36 @@ class ConferenceController extends \BaseController {
 		// }
 
 		// var_dump($paper_topics_list);
-		
-		$first_paper_id = Author::where('email', Auth::user()->email)->first()->paperid;
+
+		//$first_paper_id = Author::where('authorid', Auth::user()->author_id)->first()->paperid;
+		$first_paper_id = PaperAuthor::where('author_id', Auth::user()->author_id)->first()->paper_id;
 
 		$paper_id = Input::get('paperid', $first_paper_id);
 		$paper = Paper::find($paper_id);
 
-		$papers_array = array();
+		// $papers_array = array();
 
-		foreach($papers as $current) {
-			foreach($current->topics as $topic) {
-				if (in_array($topic->topicid, $paper->topics->lists('topicid'))) {
-					if (!in_array(Auth::user()->email, $current->authors->lists('email'))) {
-						array_push($papers_array, $current);
-					}
-				}
-			}
-		}
+		// foreach($papers as $current) {
+		// 	foreach($current->topics as $topic) {
+		// 		if (in_array($topic->topicid, $paper->topics->lists('topicid'))) {
+		// 			if (!in_array(Auth::user()->email, $current->authors->lists('email'))) {
+		// 				array_push($papers_array, $current);
+		// 			}
+		// 		}
+		// 	}
+		// }
 
-		$papers = $papers_array;
+		// $papers = $papers_array;
 
-		$user_papers = array();
+		// $user_papers = array();
 
-		foreach($all_papers as $current) {
-			foreach($current->authors as $author) {
-				if ($author->email == Auth::user()->email) {
-					array_push($user_papers, $current);
-				}
-			}
-		}
+		// foreach($all_papers as $current) {
+		// 	foreach($current->authors as $author) {
+		// 		if ($author->email == Auth::user()->email) {
+		// 			array_push($user_papers, $current);
+		// 		}
+		// 	}
+		// }
 
 		// foreach($papers as $key => $x) {
 		// 	$feedback = AuthorFeedback::where('paper1_id', $x->paperid)->where('paper2_id', $paper_id)->where('user_id', Auth::user()->id)->get();
@@ -270,6 +271,13 @@ class ConferenceController extends \BaseController {
 
 		// die();
 
+		$user_papers = PaperAuthor::where('author_id', Auth::user()->author_id)->get();
+
+		$user_papers = Paper::whereIn('paperid', $user_papers->lists('id'))->where('accepted', 'Accept')->get();
+
+		$paper_topics = PaperTopic::whereIn('paperid', $user_papers->lists('paperid'))->get();
+
+		$papers = Paper::whereIn('paperid', $paper_topics->lists('paperidid'))->where('accepted', 'Accept')->get();
 
 		return View::make('authorsourcing', compact('paper', 'papers', 'user_papers', 'paper_id'));
 	}
@@ -395,7 +403,7 @@ class ConferenceController extends \BaseController {
 
 		$rooms = Room::all();
 		//var_dump($rooms->toArray());
-		
+
 		return Redirect::action('ConferenceController@showSchedulePage');
 
 	}
@@ -430,7 +438,7 @@ class ConferenceController extends \BaseController {
 			$x->email = $author->email;
 			$x->save();
 		}
-		
+
 	}
 
 	public function showSessionsPage() {
@@ -444,7 +452,7 @@ class ConferenceController extends \BaseController {
 		//DBug::DBug($sessions->toArray());
 		//var_dump($sessions->toArray());
 		//die();
-		
+
 
 		return View::make('sessions', compact('dates'));
 	}
@@ -529,7 +537,7 @@ class ConferenceController extends \BaseController {
 					$paperauthor->save();
 				}
 
-				
+
 			}
 		}
 	}
@@ -621,7 +629,7 @@ class ConferenceController extends \BaseController {
 		$committeemembers = Reviewer::all();
 		$author_committee_members = Authors::whereIn('email', $committeemembers->lists('email'))->get();
 		//$committeemembers = Reviewer::whereIn('email', $authors->lists('email'))->get();
-		
+
 		//DBug::DBug($author_committee_members->toArray(), true);
 
 		$conference = DB::connection('openconf')->select("SELECT value FROM config WHERE setting =  'OC_confNameFull'");
@@ -640,7 +648,7 @@ class ConferenceController extends \BaseController {
 
             	foreach($authors as $author) {
             		//DBug::DBug($author->email);
-            		
+
             		Mail::send('emails.registration.author', compact('author', 'conference'), function($message) use ($author)
 			{
 				$message->to($author->email, $author->name)->subject('ConfSched Registration');

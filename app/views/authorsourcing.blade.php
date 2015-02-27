@@ -14,7 +14,7 @@
 		var get_papers_url = '{{ action("ConferenceController@getAuthorSourcingPapers")}}';
 		var get_author_papers_url = '{{ action("ConferenceController@getAuthorPapers", array("id" => Auth::user()->id)) }}';
 		var get_feedback_url = '{{ action("ConferenceController@getAuthorFeedback", array("id" => "")) }}';
-		var userid = '{{ Auth::user()->id }}';
+		var userid = '{{ Auth::user()->author_id }}';
 		var put_feedback_url = '{{ action("ConferenceController@updateAuthorFeedback", array("id" => "")) }}';
 		var post_feedback_url = '{{ action("ConferenceController@storeAuthorFeedback") }}';
 	</script>
@@ -27,7 +27,7 @@
   //               $(this).parents('form:first').submit();
 		// 	});
 		// });
-			//$scope.papers = 
+			//$scope.papers =
 	</script>
 
 	<style>
@@ -40,12 +40,12 @@
 		  border:1px solid black;
 		  background:white;
 		}
-		 
+
 		.animate-show.ng-hide-add,
 		.animate-show.ng-hide-remove {
 		  display:block!important;
 		}
-		 
+
 		.animate-show.ng-hide {
 		  line-height:0;
 		  opacity:0;
