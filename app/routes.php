@@ -20,16 +20,24 @@ Route::get('register', 'UserController@register');
 Route::post('register', 'UserController@processRegister');
 Route::get('sendEmailsAuthors', 'ConferenceController@alertUsersToCreateAccounts');
 
-Route::get('signup', 'LoginController@showSignUpForm');
-Route::get('login', 'LoginController@showLoginForm');
-Route::get('logout', 'LoginController@logout');
-Route::post('login', 'LoginController@login');
-Route::post('signup', 'LoginController@signup');
-Route::get('populateauthors', 'ConferenceController@populateAuthorsTable');
-Route::get('populatepapersauthors', 'ConferenceController@populatePapersAuthorsTable');
+/**
+ * Authentication
+ */
 
-Route::get('process', 'ConferenceController@showProcessPage');
-Route::get('acceptedpapers', 'ConferenceController@completeOpenConf');
+# Login
+Route::get('login', 'LoginController@getLogin');
+Route::post('login', 'LoginController@postLogin');
+
+# Logout
+Route::get('logout', 'LoginController@getLogout');
+
+# Signup
+Route::get('signup', 'LoginController@showSignUpForm');
+Route::post('signup', 'LoginController@signup');
+
+/**
+ * Committee Sourcing
+ */
 
 Route::get('committeesourcing', 'ConferenceController@showCommitteeSourcingPage');
 Route::get('committeesourcing/addcategory/{id}', 'ConferenceController@showAddCategoryForm');
@@ -39,6 +47,9 @@ Route::post('committeesourcing/papers/{id}', 'ConferenceController@addToCategory
 Route::get('committeesourcing/removeCategory/{id}', 'ConferenceController@removeCategory');
 Route::get('committeesourcing/removecategorypapermap/{paperid}/{categoryid}', 'ConferenceController@removeCategoryPaperMap');
 
+/**
+ * Author Sourcing
+ */
 Route::get('authorsourcing', 'ConferenceController@showAuthorSourcingPage');
 Route::get('authorsourcing/feedback', 'ConferenceController@showProvideFeedbackPage');
 Route::post('authorsourcing/feedback/{paper1}/{paper2}', 'ConferenceController@authorFeedback');
@@ -50,6 +61,18 @@ Route::get('authorsourcing/papers/{id?}', 'ConferenceController@getAuthorSourcin
 Route::get('authorfeedback/{paper1}/{paper2}/{userid}', 'ConferenceController@getAuthorFeedback');
 Route::put('authorfeedback/{id}', 'ConferenceController@updateAuthorFeedback');
 Route::post('authorfeedback', 'ConferenceController@storeAuthorFeedback');
+
+/**
+ * Schedule
+ */
+
+
+Route::get('populateauthors', 'ConferenceController@populateAuthorsTable');
+Route::get('populatepapersauthors', 'ConferenceController@populatePapersAuthorsTable');
+
+Route::get('process', 'ConferenceController@showProcessPage');
+Route::get('acceptedpapers', 'ConferenceController@completeOpenConf');
+
 
 Route::get('schedule', 'ConferenceController@showSchedulePage');
 Route::get('constraints', 'ConferenceController@showConstraintsPage');
@@ -119,7 +142,7 @@ Route::get('populateschedule', function() {
 	// $sessionpaper->session_id = $session->id;
 	// $sessionpaper->paper_id = $papers->random()->paperid;
 	// $sessionpaper->save();
-	
+
 	return Redirect::action('ConferenceController@showSchedulePage');
 
 });

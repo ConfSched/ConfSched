@@ -212,6 +212,23 @@ class ConferenceController extends \BaseController {
 		// 	}
 		// }
 
+		$paper_id = PaperAuthor::where('author_id', Auth::user()->author_id)->first()->paper_id;
+
+		if ($paperid != '') {
+			$paper_id = $paperid;
+		}
+
+		//$paper_id = Input::get('paperid', $paper_id);
+		$paper = Paper::find($paper_id);
+
+		$user_papers = PaperAuthor::where('author_id', Auth::user()->author_id)->get();
+
+		$user_papers = Paper::whereIn('paperid', $user_papers->lists('paper_id'))->where('accepted', 'Accept')->get();
+
+		$paper_topics = PaperTopic::whereIn('paperid', $user_papers->lists('paperid'))->get();
+
+		$papers = Paper::whereIn('paperid', $paper_topics->lists('paperid'))->where('accepted', 'Accept')->get();
+
 		return Response::json($papers, 200);
 	}
 
@@ -273,11 +290,11 @@ class ConferenceController extends \BaseController {
 
 		$user_papers = PaperAuthor::where('author_id', Auth::user()->author_id)->get();
 
-		$user_papers = Paper::whereIn('paperid', $user_papers->lists('id'))->where('accepted', 'Accept')->get();
+		$user_papers = Paper::whereIn('paperid', $user_papers->lists('paper_id'))->where('accepted', 'Accept')->get();
 
 		$paper_topics = PaperTopic::whereIn('paperid', $user_papers->lists('paperid'))->get();
 
-		$papers = Paper::whereIn('paperid', $paper_topics->lists('paperidid'))->where('accepted', 'Accept')->get();
+		$papers = Paper::whereIn('paperid', $paper_topics->lists('paperid'))->where('accepted', 'Accept')->get();
 
 		return View::make('authorsourcing', compact('paper', 'papers', 'user_papers', 'paper_id'));
 	}
