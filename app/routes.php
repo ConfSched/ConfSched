@@ -39,13 +39,23 @@ Route::post('signup', 'LoginController@signup');
  * Committee Sourcing
  */
 
-Route::get('committeesourcing', 'ConferenceController@showCommitteeSourcingPage');
-Route::get('committeesourcing/addcategory/{id}', 'ConferenceController@showAddCategoryForm');
-Route::post('committeesourcing/addcategory/{id}', 'ConferenceController@addCategory');
-Route::get('committeesourcing/papers/{id}', 'ConferenceController@showAddToCategoryForm');
-Route::post('committeesourcing/papers/{id}', 'ConferenceController@addToCategory');
-Route::get('committeesourcing/removeCategory/{id}', 'ConferenceController@removeCategory');
-Route::get('committeesourcing/removecategorypapermap/{paperid}/{categoryid}', 'ConferenceController@removeCategoryPaperMap');
+Route::group(['prefix' => 'committeesourcing'], function() {
+	Route::get('/', 'CommitteeSourcingController@getCommitteeSourcing');
+	Route::get('category/create', 'CommitteeSourcingController@getCreateCategory');
+	Route::post('category', 'CommitteeSourcingController@postCategory');
+	Route::get('paper/{id}', 'CommitteeSourcingController@getPaper');
+	Route::post('paper/{id}', 'CommitteeSourcingController@postPaper');
+	Route::delete('category/{id}', 'CommitteeSourcingController@deleteCategory');
+	Route::delete('category/{category_id}/paper/{paper_id}', 'CommitteeSourcingController@deleteCategoryPaperMap');
+});
+
+// Route::get('committeesourcing', 'ConferenceController@showCommitteeSourcingPage');
+// Route::get('committeesourcing/addcategory/{id}', 'ConferenceController@showAddCategoryForm');
+// Route::post('committeesourcing/addcategory/{id}', 'ConferenceController@addCategory');
+// Route::get('committeesourcing/papers/{id}', 'ConferenceController@showAddToCategoryForm');
+// Route::post('committeesourcing/papers/{id}', 'ConferenceController@addToCategory');
+// Route::get('committeesourcing/removeCategory/{id}', 'ConferenceController@removeCategory');
+// Route::get('committeesourcing/removecategorypapermap/{paperid}/{categoryid}', 'ConferenceController@removeCategoryPaperMap');
 
 /**
  * Author Sourcing
@@ -54,8 +64,7 @@ Route::get('authorsourcing', 'ConferenceController@showAuthorSourcingPage');
 Route::get('authorsourcing/feedback', 'ConferenceController@showProvideFeedbackPage');
 Route::post('authorsourcing/feedback/{paper1}/{paper2}', 'ConferenceController@authorFeedback');
 Route::get('authorsourcing/dismiss/{paper1}/{paper2}', 'ConferenceController@dismiss');
-Route::get('authorsourcing/papers', 'ConferenceController@getAuthorSourcingPapers');
-Route::get('author/{id}/papers', 'ConferenceController@getAuthorPapers');
+
 Route::get('authorsourcing/papers/{id?}', 'ConferenceController@getAuthorSourcingPapers');
 
 Route::get('authorfeedback/{paper1}/{paper2}/{userid}', 'ConferenceController@getAuthorFeedback');
@@ -65,6 +74,9 @@ Route::post('authorfeedback', 'ConferenceController@storeAuthorFeedback');
 /**
  * Schedule
  */
+
+
+Route::get('author/{id}/papers', 'ConferenceController@getAuthorPapers');
 
 
 Route::get('populateauthors', 'ConferenceController@populateAuthorsTable');
