@@ -60,16 +60,27 @@ Route::group(['prefix' => 'committeesourcing'], function() {
 /**
  * Author Sourcing
  */
-Route::get('authorsourcing', 'ConferenceController@showAuthorSourcingPage');
-Route::get('authorsourcing/feedback', 'ConferenceController@showProvideFeedbackPage');
-Route::post('authorsourcing/feedback/{paper1}/{paper2}', 'ConferenceController@authorFeedback');
-Route::get('authorsourcing/dismiss/{paper1}/{paper2}', 'ConferenceController@dismiss');
+Route::group(['prefix' => 'authorsourcing'], function() {
+	Route::get('/', 'ConferenceController@showAuthorSourcingPage');
+	Route::get('feedback', 'ConferenceController@showProvideFeedbackPage');
+	Route::post('feedback/{paper1}/{paper2}', 'ConferenceController@authorFeedback');
+	Route::get('dismiss/{paper1}/{paper2}', 'ConferenceController@dismiss');
+	Route::get('papers/{id?}', 'ConferenceController@getAuthorSourcingPapers');
+	Route::get('feedback/{paper1}/{paper2}/{userid}', 'ConferenceController@getAuthorFeedback');
+	Route::put('feedback/{id}', 'ConferenceController@updateAuthorFeedback');
+	Route::post('feedback', 'ConferenceController@storeAuthorFeedback');
+});
 
-Route::get('authorsourcing/papers/{id?}', 'ConferenceController@getAuthorSourcingPapers');
+// Route::get('authorsourcing', 'ConferenceController@showAuthorSourcingPage');
+// Route::get('authorsourcing/feedback', 'ConferenceController@showProvideFeedbackPage');
+// Route::post('authorsourcing/feedback/{paper1}/{paper2}', 'ConferenceController@authorFeedback');
+// Route::get('authorsourcing/dismiss/{paper1}/{paper2}', 'ConferenceController@dismiss');
 
-Route::get('authorfeedback/{paper1}/{paper2}/{userid}', 'ConferenceController@getAuthorFeedback');
-Route::put('authorfeedback/{id}', 'ConferenceController@updateAuthorFeedback');
-Route::post('authorfeedback', 'ConferenceController@storeAuthorFeedback');
+// Route::get('authorsourcing/papers/{id?}', 'ConferenceController@getAuthorSourcingPapers');
+
+// Route::get('authorfeedback/{paper1}/{paper2}/{userid}', 'ConferenceController@getAuthorFeedback');
+// Route::put('authorfeedback/{id}', 'ConferenceController@updateAuthorFeedback');
+// Route::post('authorfeedback', 'ConferenceController@storeAuthorFeedback');
 
 /**
  * Schedule
