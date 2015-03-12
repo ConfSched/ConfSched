@@ -71,7 +71,7 @@ ConfSched | Committee Sourcing
 <br>
 
 <div class="row">
-  <div class="col-lg-4">
+  <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
    <div class="panel panel-default">
     <div class="panel-heading">
       <h3 class="panel-title">Papers</h3>
@@ -85,13 +85,13 @@ ConfSched | Committee Sourcing
     </div>
   </div>
 </div>
-<div class="col-lg-8">
+<div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
  <?php $count = 0; ?>
  @foreach($categories as $category)
  @if ($count % 2 == 0)
  <div class="row">
   @endif
-  <div class="col-lg-6">
+  <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
    <div class="panel panel-default">
     <div class="panel-heading">
       <h3 class="panel-title">{{ $category->name }}</h3>

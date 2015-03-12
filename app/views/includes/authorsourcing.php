@@ -22,7 +22,7 @@
 	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" ng-repeat="paper in papers | orderBy:'moved_to_bottom_at'">
 		<h4>{{ paper.title }}</h4>
 		<p><strong>Abstract:</strong> {{paper.abstract}}</p>
-		<p><strong>Moved to bottom at:</strong> {{paper.moved_to_bottom_at}}</p>
+		<!-- <p><strong>Moved to bottom at:</strong> {{paper.moved_to_bottom_at}}</p> -->
 		<div class="row">
 			<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
 				<p><button class="show-author-feedback btn btn-lg btn-block btn-primary" ng-click="toggle(paper)">{{ paper.toggleText }}</button></p>

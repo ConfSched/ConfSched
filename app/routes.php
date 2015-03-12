@@ -61,14 +61,14 @@ Route::group(['prefix' => 'committeesourcing'], function() {
  * Author Sourcing
  */
 Route::group(['prefix' => 'authorsourcing'], function() {
-	Route::get('/', 'ConferenceController@showAuthorSourcingPage');
-	Route::get('feedback', 'ConferenceController@showProvideFeedbackPage');
-	Route::post('feedback/{paper1}/{paper2}', 'ConferenceController@authorFeedback');
-	Route::get('dismiss/{paper1}/{paper2}', 'ConferenceController@dismiss');
-	Route::get('papers/{id?}', 'ConferenceController@getAuthorSourcingPapers');
-	Route::get('feedback/{paper1}/{paper2}/{userid}', 'ConferenceController@getAuthorFeedback');
-	Route::put('feedback/{id}', 'ConferenceController@updateAuthorFeedback');
-	Route::post('feedback', 'ConferenceController@storeAuthorFeedback');
+	Route::get('/', 'AuthorSourcingController@getAuthorSourcing');
+	Route::get('feedback', 'AuthorSourcingController@getProvideFeedback');
+	Route::post('feedback/{paper1}/{paper2}', 'AuthorSourcingController@postProvideFeedback');
+	Route::get('dismiss/{paper1}/{paper2}', 'AuthorSourcingController@getDismiss');
+	Route::get('papers/{id?}', 'AuthorSourcingController@getPapers');
+	Route::get('feedback/{paper1}/{paper2}/{userid}', 'AuthorSourcingController@getAuthorFeedback');
+	Route::put('feedback/{id}', 'AuthorSourcingController@putAuthorFeedback');
+	Route::post('feedback', 'AuthorSourcingController@postAuthorFeedback');
 });
 
 // Route::get('authorsourcing', 'ConferenceController@showAuthorSourcingPage');
@@ -87,7 +87,7 @@ Route::group(['prefix' => 'authorsourcing'], function() {
  */
 
 
-Route::get('author/{id}/papers', 'ConferenceController@getAuthorPapers');
+// Route::get('author/{id}/papers', 'ConferenceController@getAuthorPapers');
 
 
 Route::get('populateauthors', 'ConferenceController@populateAuthorsTable');

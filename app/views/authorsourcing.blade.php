@@ -11,12 +11,12 @@
 @section('content')
 
 	<script>
-		var get_papers_url = '{{ action("ConferenceController@getAuthorSourcingPapers")}}';
-		var get_author_papers_url = '{{ action("ConferenceController@getAuthorPapers", array("id" => Auth::user()->id)) }}';
-		var get_feedback_url = '{{ action("ConferenceController@getAuthorFeedback", array("id" => "")) }}';
+		var get_papers_url = '{{ action("AuthorSourcingController@getPapers")}}';
+		var get_author_papers_url = '{{ action("AuthorSourcingController@getPapers", array("id" => Auth::user()->id)) }}';
+		var get_feedback_url = '{{ action("AuthorSourcingController@getAuthorFeedback", array("id" => "")) }}';
 		var userid = '{{ Auth::user()->author_id }}';
-		var put_feedback_url = '{{ action("ConferenceController@updateAuthorFeedback", array("id" => "")) }}';
-		var post_feedback_url = '{{ action("ConferenceController@storeAuthorFeedback") }}';
+		var put_feedback_url = '{{ action("AuthorSourcingController@putAuthorFeedback", array("id" => "")) }}';
+		var post_feedback_url = '{{ action("AuthorSourcingController@postAuthorFeedback") }}';
 	</script>
 
 	{{ HTML::script('assets/js/authorsourcing.js')}}

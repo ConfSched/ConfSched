@@ -2,6 +2,10 @@
 
 class AuthorSourcingController extends \BaseController {
 
+	public function __construct() {
+		$this->beforeFilter('auth');
+	}
+
 	public function getAuthorSourcing() {
 		$papers = Paper::with('topics')->get();
 		$first_paper_id = PaperAuthor::where('author_id', Auth::user()->author_id)->first()->paper_id;
@@ -61,7 +65,7 @@ class AuthorSourcingController extends \BaseController {
 		return Redirect::action('ConferenceController@showAuthorSourcingPage', array('paperid' =>$paper2));
 	}
 
-	public function getPapers() {
+	public function getPapers($paperid='') {
 
 		$first_paper_id = Author::where('email', Auth::user()->email)->first()->paperid;
 
@@ -83,6 +87,54 @@ class AuthorSourcingController extends \BaseController {
 		$papers = Paper::whereIn('paperid', $paper_topics->lists('paperid'))->where('accepted', 'Accept')->get();
 
 		return Response::json($papers, 200);
+	}
+
+	public function getAuthorFeedback($paper1, $paper2, $userid) {
+		$feedback = AuthorFeedback::where('paper1_id', $paper1)->where('paper2_id', $paper2)->where('user_id', $userid)->first();
+
+		if (count($feedback) < 1) {
+			return Response::make('None found.', 404);
+		}
+
+		return Response::json($feedback->toJson(), 200);
+	}
+
+	public function putAuthorFeedback($id) {
+		$feedback = AuthorFeedback::find($id);
+
+		if (count($feedback) < 1) {
+			return Response::make('Feedback not found.', 404);
+		}
+
+		$feedback->paper1_id = Input::get('paper1');
+		$feedback->paper2_id = Input::get('paper2');
+		$feedback->user_id = Input::get('userid');
+		$feedback->relevant = Input::get('relevant');
+		$feedback->interest = Input::get('interest');
+		// $feedback->moved_to_bottom_at = Input::get('moved_to_bottom_at', null);
+		if (Input::has('moved_to_bottom_at')) {
+			$feedback->moved_to_bottom_at = Date::now();
+		}
+		$feedback->save();
+
+		return Response::json($feedback->toJson(), 200);
+	}
+
+	public function postAuthorFeedback() {
+		$feedback = new AuthorFeedback;
+
+		$feedback->paper1_id = Input::get('paper1');
+		$feedback->paper2_id = Input::get('paper2');
+		$feedback->user_id = Input::get('userid');
+		$feedback->relevant = Input::get('relevant', null);
+		$feedback->interest = Input::get('interest', null);
+		//$feedback->moved_to_bottom_at = Input::get('moved_to_bottom_at', null);
+		if (Input::has('moved_to_bottom_at')) {
+			$feedback->moved_to_bottom_at = Date::now();
+		}
+		$feedback->save();
+
+		return Response::json($feedback->toJson(), 201);
 	}
 
 }

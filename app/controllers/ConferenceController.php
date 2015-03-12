@@ -340,53 +340,53 @@ class ConferenceController extends \BaseController {
 		return Redirect::action('ConferenceController@showAuthorSourcingPage', array('paperid' =>$paper2));
 	}
 
-	public function getAuthorFeedback($paper1, $paper2, $userid) {
-		$feedback = AuthorFeedback::where('paper1_id', $paper1)->where('paper2_id', $paper2)->where('user_id', $userid)->first();
+	// public function getAuthorFeedback($paper1, $paper2, $userid) {
+	// 	$feedback = AuthorFeedback::where('paper1_id', $paper1)->where('paper2_id', $paper2)->where('user_id', $userid)->first();
 
-		if (count($feedback) < 1) {
-			return Response::make('None found.', 404);
-		}
+	// 	if (count($feedback) < 1) {
+	// 		return Response::make('None found.', 404);
+	// 	}
 
-		return Response::json($feedback->toJson(), 200);
-	}
+	// 	return Response::json($feedback->toJson(), 200);
+	// }
 
-	public function updateAuthorFeedback($id) {
-		$feedback = AuthorFeedback::find($id);
+	// public function updateAuthorFeedback($id) {
+	// 	$feedback = AuthorFeedback::find($id);
 
-		if (count($feedback) < 1) {
-			return Response::make('Feedback not found.', 404);
-		}
+	// 	if (count($feedback) < 1) {
+	// 		return Response::make('Feedback not found.', 404);
+	// 	}
 
-		$feedback->paper1_id = Input::get('paper1');
-		$feedback->paper2_id = Input::get('paper2');
-		$feedback->user_id = Input::get('userid');
-		$feedback->relevant = Input::get('relevant');
-		$feedback->interest = Input::get('interest');
-		// $feedback->moved_to_bottom_at = Input::get('moved_to_bottom_at', null);
-		if (Input::has('moved_to_bottom_at')) {
-			$feedback->moved_to_bottom_at = Date::now();
-		}
-		$feedback->save();
+	// 	$feedback->paper1_id = Input::get('paper1');
+	// 	$feedback->paper2_id = Input::get('paper2');
+	// 	$feedback->user_id = Input::get('userid');
+	// 	$feedback->relevant = Input::get('relevant');
+	// 	$feedback->interest = Input::get('interest');
+	// 	// $feedback->moved_to_bottom_at = Input::get('moved_to_bottom_at', null);
+	// 	if (Input::has('moved_to_bottom_at')) {
+	// 		$feedback->moved_to_bottom_at = Date::now();
+	// 	}
+	// 	$feedback->save();
 
-		return Response::json($feedback->toJson(), 200);
-	}
+	// 	return Response::json($feedback->toJson(), 200);
+	// }
 
-	public function storeAuthorFeedback() {
-		$feedback = new AuthorFeedback;
+	// public function storeAuthorFeedback() {
+	// 	$feedback = new AuthorFeedback;
 
-		$feedback->paper1_id = Input::get('paper1');
-		$feedback->paper2_id = Input::get('paper2');
-		$feedback->user_id = Input::get('userid');
-		$feedback->relevant = Input::get('relevant', null);
-		$feedback->interest = Input::get('interest', null);
-		//$feedback->moved_to_bottom_at = Input::get('moved_to_bottom_at', null);
-		if (Input::has('moved_to_bottom_at')) {
-			$feedback->moved_to_bottom_at = Date::now();
-		}
-		$feedback->save();
+	// 	$feedback->paper1_id = Input::get('paper1');
+	// 	$feedback->paper2_id = Input::get('paper2');
+	// 	$feedback->user_id = Input::get('userid');
+	// 	$feedback->relevant = Input::get('relevant', null);
+	// 	$feedback->interest = Input::get('interest', null);
+	// 	//$feedback->moved_to_bottom_at = Input::get('moved_to_bottom_at', null);
+	// 	if (Input::has('moved_to_bottom_at')) {
+	// 		$feedback->moved_to_bottom_at = Date::now();
+	// 	}
+	// 	$feedback->save();
 
-		return Response::json($feedback->toJson(), 201);
-	}
+	// 	return Response::json($feedback->toJson(), 201);
+	// }
 
 	public function showSchedulePage() {
 		$rooms = Room::all();

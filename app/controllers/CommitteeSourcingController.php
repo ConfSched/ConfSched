@@ -2,6 +2,10 @@
 
 class CommitteeSourcingController extends \BaseController {
 
+	public function __construct() {
+		$this->beforeFilter('auth');
+	}
+
 	public function getCommitteeSourcing() {
 
 		$reviewer = Reviewer::where('reviewerid', Auth::user()->committee_id)->first();
