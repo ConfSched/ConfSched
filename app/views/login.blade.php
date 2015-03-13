@@ -10,9 +10,14 @@
 
 @section('content')
 	<style>
-		.main-content-wrapper {
-			width: 50%;
-		}
+            .main-content-wrapper {
+              width: 90%;
+            }
+            @media screen and (min-width: 1065px) {
+      		.main-content-wrapper {
+      			width: 75%;
+      		}
+            }
 	</style>
 
 	<h1>Login</h1>
@@ -26,9 +31,17 @@
 
 	<div class="pull-right" style="padding-bottom: 10px;">{{ link_to('/signup', "Don't have an account?") }}</div>
 
-	@if(Session::has('error'))
-		{{ Session::get('error') }}
-	@endif
+      <div class="clearfix"></div>
+
+      @if(Session::has('error'))
+        <div class="row">
+          <div class="col-xs-12 col-sm-12 col-md-8 col-md-offset-2 col-lg-8 col-lg-offset-2">
+            <div class="alert alert-danger">
+            	{{ Session::get('error') }}
+            </div>
+          </div>
+        </div>
+      @endif
 
 	{{ Form::open(array('class' => 'form', 'method' => 'POST')) }}
 		<div class="row">

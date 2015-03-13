@@ -1,0 +1,77 @@
+@import 'variables'
+@import 'bower_components/bootstrap-sass/assets/stylesheets/bootstrap'
+@import 'bower_components/font-awesome/scss/font-awesome'
+
+body
+    font-family: 'Oswald', sans-serif
+    font-size: 14px
+    font-weight: lighter
+
+.logo
+    max-height: 100px
+    @media screen and (max-width: 470px)
+        max-height: 75px
+
+.navbar-brand
+    height: auto
+    padding: 5px
+
+.navbar-right
+    @media screen and (min-width: 1065px)
+        padding-right: 50px
+
+
+.navbar-default .navbar-nav>li>a
+    @media screen and (min-width: 1065px)
+        font-size: 20px
+    @media screen and (max-width: 1065px)
+        font-size: 14px
+
+.carousel-inner .item img
+    width: auto
+    height: 350px
+    overflow: hidden
+
+footer
+    padding: 15px
+    text-align: center
+
+.main-content
+    width: 90%
+    @media screen and (min-width: 1065px)
+        width: 75%
+
+.navbar-default
+    border: 0
+    border-radius: 0
+    border-bottom: 1px solid #253b56
+
+hr
+    border-color: #253b56
+
+.btn
+    -webkit-box-shadow: none
+    -moz-box-shadow: none
+    box-shadow: none
+    background-image: none
+    border-radius: 0
+
+.btn:focus
+    outline: 5px auto #fff
+
+.btn-primary
+    background-color: #253b56
+    color: #fff
+
+.btn-primary:hover
+    background-color: darken(#253b56, 5.0%)
+
+.well, .navbar-inner, .popover, .btn, .tooltip, input, select, textarea, pre, .progress, .modal, .add-on, .alert, .table-bordered, .nav>.active>a, .dropdown-menu, .tooltip-inner, .badge, .label, .img-polaroid
+    -moz-box-shadow: none !important
+    -webkit-box-shadow: none !important
+    box-shadow: none !important
+    -webkit-border-radius: 0px !important
+    -moz-border-radius: 0px !important
+    border-radius: 0px !important
+    border-collapse: collapse !important
+    background-image: none !important

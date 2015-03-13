@@ -9,8 +9,8 @@
 @endsection
 
 @section('content')
-	<h1>Conf Sched</h1>
-	<hr>
+	{{-- <h1>Conf Sched</h1>
+	<hr> --}}
 
 	<h2>Hello World</h2>
 	<p> look at that, it's exactly three seconds before i honk your nose and pull your underwear over your head. kinda hot in these rhinos. kinda hot in these rhinos. brain freeze. look ma i'm road kill excuse me, i'd like to ass you a few questions. good morning, oh in case i don't see you, good afternoon, good evening and goodnight. hey, maybe i will give you a call sometime. your number still 911? excuse me, i'd like to ass you a few questions. here she comes to wreck the day. look ma i'm road kill alrighty then ,</p>

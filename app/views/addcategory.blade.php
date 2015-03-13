@@ -10,7 +10,7 @@
 
 @section('content')
 
-	<h1>Add Category</h1>
+	<h3>Add Category</h3>
 	<hr>
 
 	<div class="row">

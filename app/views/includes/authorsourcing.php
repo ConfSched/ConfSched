@@ -1,6 +1,6 @@
 <div data-ng-app="testapp">
 
-<h1>Author Sourcing</h1>
+<h3>Author Sourcing</h3>
 <hr>
 
 <div ng-controller="AuthorPapersController">

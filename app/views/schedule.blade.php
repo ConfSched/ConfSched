@@ -29,16 +29,16 @@
 
 	@if(count($sessions) < 1 || true)
 		<div class="row">
-			<div class="col-xs-12 col-md-4 col-md-offset-4">
+			<div class="col-xs-12 col-md-6 col-md-offset-3">
 				<a href="{{ action('ConferenceController@showAddRoomsPage') }}" class="btn btn-lg btn-default btn-block" style="margin-bottom: 10px;">Rooms</a>
 			</div>
-			<div class="col-xs-12 col-md-4 col-md-offset-4">
+			<div class="col-xs-12 col-md-6 col-md-offset-3">
 				<a href="{{ action('ConferenceController@showSessionsPage') }}" class="btn btn-lg btn-default btn-block" style="margin-bottom: 10px;">Sessions</a>
 			</div>
-			<div class="col-xs-12 col-md-4 col-md-offset-4">
+			<div class="col-xs-12 col-md-6 col-md-offset-3">
 				<a href="{{ action('ConferenceController@showConstraintsPage') }}" class="btn btn-lg btn-default btn-block" style="margin-bottom: 10px;">Constraints</a>
 			</div>
-			<div class="col-xs-12 col-md-4 col-md-offset-4">
+			<div class="col-xs-12 col-md-6 col-md-offset-3">
 				@if(count($rooms) < 1)
 					<a href="#" class="btn btn-lg btn-primary btn-block" style="margin-bottom: 10px;" disabled>Generate</a>
 				@else
@@ -74,5 +74,5 @@
 		<br>
 	@endif
 	<!-- content goes here -->
-	
+
 @endsection

@@ -45,7 +45,7 @@ ConfSched | Committee Sourcing
 });
 </script>
 
-<h1>Committee Sourcing</h1>
+<h3>Committee Sourcing</h3>
 <hr>
 
 <div class="row">
