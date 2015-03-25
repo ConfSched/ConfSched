@@ -15,8 +15,10 @@
 
 	<div class="row">
 		<div class="col-lg-12">
-			
-			<p>{{ HTML::linkAction('ConferenceController@showAddSessionsPage', 'Add Session', [], ['class' => 'btn btn-primary btn-lg']) }}</p>
+
+                <p><a href="{{ URL::previous() }}" class="btn btn-default"><i class="fa fa-arrow-left"></i> Go Back</a>
+
+		    {{ HTML::linkAction('ConferenceController@showAddSessionsPage', 'Add Session', [], ['class' => 'btn btn-primary btn-lg pull-right']) }}</p>
 
 			{{-- @foreach($sessions as $session)
 				<div class="col-lg-3">
@@ -44,8 +46,13 @@
 				<?php $sessions = Sessions::where(DB::Raw('CAST(start AS DATE)'), $date->date)->orderBy('start')->get(); ?>
 				{{-- DBug::DBug(DB::getQueryLog()) --}}
 				{{-- DBug::DBug($sessions->toArray()) --}}
-				<?php //die(); ?>
-				<div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
+                        @if (count($dates) == 3)
+				  <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
+                        @elseif(count($dates) < 3)
+                          <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                        @else
+                          <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
+                        @endif
 				<h3>{{ Date::parse($date->date)->format('n/j D') }}</h3>
 				@foreach($sessions as $session)
 					<!-- <div class="col-lg-3"> -->
@@ -71,7 +78,6 @@
 				</div>
 			@endforeach
 			</div>
-
 		</div>
 	</div>
 @endsection

@@ -1,5 +1,5 @@
 <?php
 
 return [
-	'openconf_url' => '/openconf'
+	'openconf_url' => '//cs-sr.academic.roanoke.edu/openconf'
 ];

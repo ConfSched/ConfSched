@@ -22,6 +22,8 @@
 	<div class="row">
 		<div class="col-lg-12">
 
+                  <p><a href="{{ URL::previous() }}" class="btn btn-default"><i class="fa fa-arrow-left"></i> Go Back</a></p>
+
 			@if($errors->has())
 				<ul>
 					@foreach($errors->all() as $error)
@@ -29,7 +31,7 @@
 					@endforeach
 				</ul>
 			@endif
-		
+
 			{{ Form::open(array('class' => 'form', 'method' => 'POST')) }}
 				<div class="row">
 					<div class="col-lg-12">

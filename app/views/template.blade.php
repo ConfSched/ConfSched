@@ -34,12 +34,14 @@
 </head>
 <body>
 	@yield('navigation')
-	<div class="container main-content">
-		<div class="container-fluid main-content-wrapper">
-			@yield('content')
-		</div>
-	</div>
-    <hr>
+      <div class="main-wrapper">
+      	<div class="container main-content">
+      		<div class="container-fluid main-content-wrapper">
+      			@yield('content')
+      		</div>
+      	</div>
+      </div>
+    {{-- <hr> --}}
     <footer class="container-fluid">
       <p>&copy; ConfSched {{ date('Y') }}</p>
     </footer>

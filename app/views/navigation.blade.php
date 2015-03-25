@@ -34,14 +34,16 @@
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
                         <li><a href="/"><i class='fa fa-home'></i> Home</a></li>
+                        <li>{{ link_to(Config::get('site.openconf_url'), 'OpenConf') }}</li>
+                        <li><a href="{{ action('ConferenceController@showSchedulePage') }}"><i class="fa fa-calendar"></i> Schedule</a></li>
 				@if(Auth::guest())
 					{{-- <li>{{ link_to('/signup', 'Sign Up') }}</li> --}}
 					{{-- <li>{{ link_to('/login', 'Log In')}}</li> --}}
-                              <li><a href="/signup"><i class="fa fa-user-plus"></i> Sign Up</a></li>
-                              <li><a href="/login"><i class="fa fa-sign-in"></i> Sign In</a></li>
+                              <li><a href="{{ action('UserController@register') }}"><i class="fa fa-user-plus"></i> Sign Up</a></li>
+                              <li><a href="{{ action('LoginController@getLogin') }}"><i class="fa fa-sign-in"></i> Sign In</a></li>
 				@else
 					{{-- <li>{{ link_to('/logout', 'Logout ' . Auth::user()->username) }}</li> --}}
-                              <li><a href='/logout'><i class="fa fa-sign-out"></i> Logout {{Auth::user()->username}}</a></li>
+                              <li><a href="{{ action('LoginController@getLogout') }}"><i class="fa fa-sign-out"></i> Logout {{Auth::user()->username}}</a></li>
 				@endif
 			</ul>
 		</div><!--/.nav-collapse -->

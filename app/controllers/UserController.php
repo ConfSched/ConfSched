@@ -16,13 +16,15 @@ class UserController extends \BaseController {
 		}
 
 		if (is_null($author) && is_null($member)) {
-			die('Need a valid author or member id');
+			$first_name = '';
+			$last_name = '';
+			$email = '';
 		}
-
-		$first_name = (is_null($author) ? $member->name_first : $author->first_name);
-		$last_name = (is_null($author) ? $member->name_last : $author->last_name);
-		$email = (is_null($author) ? $member->email : $author->email);
-		
+		else {
+			$first_name = (is_null($author) ? $member->name_first : $author->first_name);
+			$last_name = (is_null($author) ? $member->name_last : $author->last_name);
+			$email = (is_null($author) ? $member->email : $author->email);
+		}
 
 		return View::make('register', compact('author', 'member', 'first_name', 'last_name', 'email'));
 	}

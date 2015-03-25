@@ -28,19 +28,32 @@
 	<hr>
 
 	@if(count($sessions) < 1 || true)
+          <div class="row">
+            <div class="col-xs-12">
+              <p>Welcome to the schedule page. Here you can add rooms for your schedule, set up the sessions for your schedule, add any constraints for your schedule, and generate your schedule.</p>
+
+              <ol>
+                <li>Add your rooms</li>
+                <li>Add your sessions</li>
+                <li>Add any other constraints</li>
+                <li>Generate Schedule</li>
+              </ol>
+            </div>
+          </div>
+
 		<div class="row">
 			<div class="col-xs-12 col-md-6 col-md-offset-3">
-				<a href="{{ action('ConferenceController@showAddRoomsPage') }}" class="btn btn-lg btn-default btn-block" style="margin-bottom: 10px;">Rooms</a>
+				<a href="{{ action('ConferenceController@showAddRoomsPage') }}" class="btn btn-lg btn-default btn-block" style="margin-bottom: 10px;">Manage Rooms</a>
 			</div>
 			<div class="col-xs-12 col-md-6 col-md-offset-3">
-				<a href="{{ action('ConferenceController@showSessionsPage') }}" class="btn btn-lg btn-default btn-block" style="margin-bottom: 10px;">Sessions</a>
+				<a href="{{ action('ConferenceController@showSessionsPage') }}" class="btn btn-lg btn-default btn-block" style="margin-bottom: 10px;">Manage Sessions</a>
 			</div>
 			<div class="col-xs-12 col-md-6 col-md-offset-3">
-				<a href="{{ action('ConferenceController@showConstraintsPage') }}" class="btn btn-lg btn-default btn-block" style="margin-bottom: 10px;">Constraints</a>
+				<a href="{{ action('ConferenceController@showConstraintsPage') }}" class="btn btn-lg btn-default btn-block" style="margin-bottom: 10px;">Manage Constraints</a>
 			</div>
 			<div class="col-xs-12 col-md-6 col-md-offset-3">
 				@if(count($rooms) < 1)
-					<a href="#" class="btn btn-lg btn-primary btn-block" style="margin-bottom: 10px;" disabled>Generate</a>
+					<a href="#" class="btn btn-lg btn-primary btn-block" style="margin-bottom: 10px;" disabled>Generate Schedule</a>
 				@else
 					<a href="populateschedule" class="btn btn-lg btn-primary btn-block" style="margin-bottom: 10px;">Generate</a>
 				@endif

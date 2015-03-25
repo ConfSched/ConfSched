@@ -6,6 +6,7 @@ body
     font-family: 'Oswald', sans-serif
     font-size: 14px
     font-weight: lighter
+    background-color: #253b56
 
 .logo
     max-height: 100px
@@ -22,10 +23,14 @@ body
 
 
 .navbar-default .navbar-nav>li>a
+    color: #fff
     @media screen and (min-width: 1065px)
         font-size: 20px
     @media screen and (max-width: 1065px)
         font-size: 14px
+
+.navbar-default .navbar-nav>li>a:hover
+    color: #576B84
 
 .carousel-inner .item img
     width: auto
@@ -35,16 +40,23 @@ body
 footer
     padding: 15px
     text-align: center
+    background-color: #253b56
+    color: #fff
 
 .main-content
     width: 90%
     @media screen and (min-width: 1065px)
         width: 75%
+    background-color: #fff
+    max-width: 1500px
 
 .navbar-default
     border: 0
     border-radius: 0
-    border-bottom: 1px solid #253b56
+    //border-bottom: 1px solid #253b56
+    background-color: #253b56
+    margin: 0
+    padding-bottom: 20px
 
 hr
     border-color: #253b56
@@ -75,3 +87,10 @@ hr
     border-radius: 0px !important
     border-collapse: collapse !important
     background-image: none !important
+
+.main-wrapper
+    background-color: #fff
+    width: 100%
+
+ul.nav.navbar-nav
+    margin-top: 10px
