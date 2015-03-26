@@ -4,10 +4,6 @@
 	ConfSched | Home
 @endsection
 
-@section('navigation')
-	@include('navigation')
-@endsection
-
 @section('content')
 	<style>
 		.main-content-wrapper {

@@ -4,10 +4,6 @@
 	ConfSched | Constraints
 @endsection
 
-@section('navigation')
-	@include('navigation')
-@endsection
-
 @section('content')
 
 	<h1>Constraints</h1>

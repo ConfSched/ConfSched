@@ -4,10 +4,6 @@
 	ConfSched | Sessions
 @endsection
 
-@section('navigation')
-	@include('navigation')
-@endsection
-
 @section('content')
 
 	<h1>Sessions</h1>

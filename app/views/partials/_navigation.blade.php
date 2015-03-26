@@ -8,7 +8,7 @@
 				<span class="icon-bar"></span>
 				<span class="icon-bar"></span>
 			</button>
-			<a class="navbar-brand" href="#"><img src="{{ asset('/assets/images/confsched.png') }}" class="logo img-responsive"></a>
+			<a class="navbar-brand" href="#"><img src="{{ asset(Config::get('site.conference_logo')) }}" class="logo img-responsive"></a>
 		</div>
 		<div class="navbar-collapse collapse">
 			<ul class="nav navbar-nav">
@@ -34,12 +34,14 @@
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
                         <li><a href="/"><i class='fa fa-home'></i> Home</a></li>
-                        <li>{{ link_to(Config::get('site.openconf_url'), 'OpenConf') }}</li>
+                        {{-- <li>{{ link_to(Config::get('site.openconf_url'), 'OpenConf') }}</li> --}}
+                        <li>{{ link_to('/committeesourcing', 'Committee Sourcing') }}</li>
+                        <li>{{ link_to('/authorsourcing', 'Author Sourcing') }}</li>
                         <li><a href="{{ action('ConferenceController@showSchedulePage') }}"><i class="fa fa-calendar"></i> Schedule</a></li>
 				@if(Auth::guest())
 					{{-- <li>{{ link_to('/signup', 'Sign Up') }}</li> --}}
 					{{-- <li>{{ link_to('/login', 'Log In')}}</li> --}}
-                              <li><a href="{{ action('UserController@register') }}"><i class="fa fa-user-plus"></i> Sign Up</a></li>
+                             {{--  <li><a href="{{ action('UserController@register') }}"><i class="fa fa-user-plus"></i> Sign Up</a></li> --}}
                               <li><a href="{{ action('LoginController@getLogin') }}"><i class="fa fa-sign-in"></i> Sign In</a></li>
 				@else
 					{{-- <li>{{ link_to('/logout', 'Logout ' . Auth::user()->username) }}</li> --}}

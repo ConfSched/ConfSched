@@ -4,10 +4,6 @@
 	ConfSched | Committee Sourcing
 @endsection
 
-@section('navigation')
-	@include('navigation')
-@endsection
-
 @section('content')
 
 	<script>
@@ -95,7 +91,7 @@
 
 	<div class="row">
 		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-			
+
 		</div>
 	</div>
 @endsection

@@ -26,10 +26,11 @@ class CommitteeSourcingController extends \BaseController {
 	}
 
 	public function getCreateCategory() {
+		$id = Input::get('id');
 		return View::make('addcategory', compact('id'));
 	}
 
-	public function postCategory() {
+	public function postCategory($id) {
 		$validator = Validator::make(Input::all(), array('name' => 'required'));
 
 		if ($validator->fails()){

@@ -4,10 +4,6 @@
 	ConfSched | Process
 @endsection
 
-@section('navigation')
-	@include('navigation')
-@endsection
-
 @section('content')
 	<style>
 		.list-group { margin-bottom:0px; }

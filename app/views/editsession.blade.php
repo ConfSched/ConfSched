@@ -4,10 +4,6 @@
 	ConfSched | Sessions
 @endsection
 
-@section('navigation')
-	@include('navigation')
-@endsection
-
 @section('content')
 
 	<script>
@@ -21,7 +17,7 @@
 
 	<div class="row">
 		<div class="col-lg-12">
-		
+
 		@if($errors->has())
 			<ul>
 				@foreach($errors->all() as $error)

@@ -33,7 +33,7 @@
       {{ HTML::script('assets/javascripts/application.js') }}
 </head>
 <body>
-	@yield('navigation')
+	@include('partials._navigation')
       <div class="main-wrapper">
       	<div class="container main-content">
       		<div class="container-fluid main-content-wrapper">

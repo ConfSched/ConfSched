@@ -4,10 +4,6 @@
 	ConfSched | Constraints
 @endsection
 
-@section('navigation')
-	@include('navigation')
-@endsection
-
 @section('content')
 
 	<script>
@@ -23,7 +19,7 @@
 				$('.additional-container').append(newDiv);
 			});
 		})
-	</script>	
+	</script>
 
 	<h1>Add Author Mapping</h1>
 	<hr>
@@ -67,7 +63,7 @@
 				<div class="additional-container"></div>
 				<div class="row">
 					<div class="col-lg-12">
-						<a href="#" class="add-additional-link">Add additional</a> 
+						<a href="#" class="add-additional-link">Add additional</a>
 					</div>
 				</div>
 				<div class="row" id="div-author-input" style="display:none;">

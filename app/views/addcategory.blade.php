@@ -4,10 +4,6 @@
 	ConfSched | Committee Sourcing
 @endsection
 
-@section('navigation')
-	@include('navigation')
-@endsection
-
 @section('content')
 
 	<h3>Add Category</h3>
@@ -15,7 +11,9 @@
 
 	<div class="row">
 		<div class="col-lg-12">
-			{{ Form::open(array('class' => 'form', 'method' => 'POST')) }}
+                  <p><a href="{{ URL::previous() }}" class="btn btn-default"><i class="fa fa-arrow-left"></i> Go Back</a></p>
+
+			{{ Form::open(array('class' => 'form', 'method' => 'POST', 'action' => ['CommitteeSourcingController@postCategory', $id])) }}
 				<div class="row">
 					<div class="col-lg-12">
 						<div class="form-group">

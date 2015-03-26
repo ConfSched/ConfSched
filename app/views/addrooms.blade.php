@@ -4,10 +4,6 @@
   ConfSched | Add Rooms
 @endsection
 
-@section('navigation')
-  @include('navigation')
-@endsection
-
 @section('content')
 
   <h1>Add Rooms</h1>

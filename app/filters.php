@@ -48,6 +48,24 @@ Route::filter('auth', function()
 	}
 });
 
+Route::filter('auth.author', function() {
+	if (Auth::guest() || ! Auth::user()->author) {
+		return Redirect::guest('login');
+	}
+});
+
+Route::filter('auth.admin', function() {
+	if (Auth::guest() || ! Auth::user()->admin) {
+		return Redirect::guest('login');
+	}
+});
+
+Route::filter('auth.committee', function() {
+	if (Auth::guest() || ! Auth::user()->committee) {
+		return Redirect::guest('login');
+	}
+});
+
 
 Route::filter('auth.basic', function()
 {

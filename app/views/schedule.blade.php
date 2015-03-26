@@ -4,10 +4,6 @@
 	ConfSched | Schedule
 @endsection
 
-@section('navigation')
-	@include('navigation')
-@endsection
-
 @section('content')
 
 	<script>
@@ -30,6 +26,7 @@
 	@if(count($sessions) < 1 || true)
           <div class="row">
             <div class="col-xs-12">
+              <p><a href="{{ URL::previous() }}" class="btn btn-default"><i class="fa fa-arrow-left"></i> Go Back</a></p>
               <p>Welcome to the schedule page. Here you can add rooms for your schedule, set up the sessions for your schedule, add any constraints for your schedule, and generate your schedule.</p>
 
               <ol>

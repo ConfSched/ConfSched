@@ -4,6 +4,7 @@ class AuthorSourcingController extends \BaseController {
 
 	public function __construct() {
 		$this->beforeFilter('auth');
+		$this->beforeFilter('auth.author');
 	}
 
 	public function getAuthorSourcing() {

@@ -49,6 +49,13 @@ ConfSched | Committee Sourcing
 <hr>
 
 <div class="row">
+  <div class="col-xs-12">
+    <p><a href="{{ URL::previous() }}" class="btn btn-default"><i class="fa fa-arrow-left"></i> Go Back</a></p>
+    <p>Welcome to the committee sourcing phase. In the committee sourcing phase, data is collected on how the papers are related. To help us out, committee members create categories and add related papers to those categories. This gives us a grouping of papers and will assist us in the scheduling process.</p>
+  </div>
+</div>
+
+<div class="row">
   <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
    <form method="GET">
     <select name="topicid" id="topic_filter" class="form-control">
@@ -62,6 +69,7 @@ ConfSched | Committee Sourcing
    </select>
  </form>
 </div>
+
 <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
  <a href="{{ action('CommitteeSourcingController@getCreateCategory', array('id' => $topic->topicid)) }}" class="btn btn-primary btn-lg visible-md visible-lg pull-right">Add new category</a>
  <a href="{{ action('CommitteeSourcingController@getCreateCategory', array('id' => $topic->topicid)) }}" class="btn btn-primary btn-lg btn-block hidden-md hidden-lg" style="margin-top: 10px;">Add new category</a>

@@ -42,7 +42,7 @@ Route::post('signup', 'LoginController@signup');
 Route::group(['prefix' => 'committeesourcing'], function() {
 	Route::get('/', 'CommitteeSourcingController@getCommitteeSourcing');
 	Route::get('category/create', 'CommitteeSourcingController@getCreateCategory');
-	Route::post('category', 'CommitteeSourcingController@postCategory');
+	Route::post('category/{id}', 'CommitteeSourcingController@postCategory');
 	Route::get('paper/{id}', 'CommitteeSourcingController@getPaper');
 	Route::post('paper/{id}', 'CommitteeSourcingController@postPaper');
 	Route::delete('category/{id}', 'CommitteeSourcingController@deleteCategory');
