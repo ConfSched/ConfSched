@@ -4,7 +4,7 @@
 
 <h4>Tasks to do:</h4>
 
-<p><a href="{{ action('AuthorSourcingController@getAuthorSourcing') }}" class="btn btn-lg btn-primary">Author Sourcing</a></p>
+<p><a href="{{ action('AuthorSourcingController@getAuthorSourcing') }}" class="btn btn-lg btn-primary btn-block">Author Sourcing</a></p>
 
 <h4>Completed Tasks:</h4>
 

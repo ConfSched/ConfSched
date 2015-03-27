@@ -8,7 +8,7 @@
 				<span class="icon-bar"></span>
 				<span class="icon-bar"></span>
 			</button>
-			<a class="navbar-brand" href="#"><img src="{{ asset(Config::get('site.conference_logo')) }}" class="logo img-responsive"></a>
+			<a class="navbar-brand" href="/"><img src="{{ asset(Config::get('site.conference_logo')) }}" class="logo img-responsive"></a>
 		</div>
 		<div class="navbar-collapse collapse">
 			<ul class="nav navbar-nav">
@@ -33,10 +33,15 @@
 				<!-- </li> -->
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
-                        <li><a href="/"><i class='fa fa-home'></i> Home</a></li>
+                        @if (Auth::guest())
+                          <li><a href="/"><i class='fa fa-home'></i> Home</a></li>
+                        @endif
+                        @if (! Auth::guest())
+                          <li><a href="/"><i class="fa fa-dashboard"></i> Dashboard</a></li>
+                        @endif
                         {{-- <li>{{ link_to(Config::get('site.openconf_url'), 'OpenConf') }}</li> --}}
-                        <li>{{ link_to('/committeesourcing', 'Committee Sourcing') }}</li>
-                        <li>{{ link_to('/authorsourcing', 'Author Sourcing') }}</li>
+                        {{-- <li>{{ link_to('/committeesourcing', 'Committee Sourcing') }}</li>
+                        <li>{{ link_to('/authorsourcing', 'Author Sourcing') }}</li> --}}
                         <li><a href="{{ action('ConferenceController@showSchedulePage') }}"><i class="fa fa-calendar"></i> Schedule</a></li>
 				@if(Auth::guest())
 					{{-- <li>{{ link_to('/signup', 'Sign Up') }}</li> --}}

@@ -25,7 +25,7 @@
 		@endforeach
 	</div>
 
-	<div class="pull-right" style="padding-bottom: 10px;">{{ link_to('/signup', "Don't have an account?") }}</div>
+	{{-- <div class="pull-right" style="padding-bottom: 10px;">{{ link_to('/signup', "Don't have an account?") }}</div> --}}
 
       <div class="clearfix"></div>
 

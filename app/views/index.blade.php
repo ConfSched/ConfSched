@@ -13,27 +13,25 @@
       Roanoke College</p>
       <hr> --}}
 
-      @if(! Auth::guest() && Auth::user()->admin)
-        <h1>Dashboard</h1>
-        <hr>
-
-        <h4>Hello {{ Auth::user()->name }},</h4>
-
-        @include('partials.dashboards._admin')
-      @elseif(! Auth::guest() && Auth::user()->author)
-        <h1>Dashboard</h1>
-        <hr>
-
-        <h4>Hello {{ Auth::user()->name }},</h4>
-
-        @include('partials.dashboards._author')
-      @elseif(! Auth::guest() && Auth::user()->committee)
-        <h1>Dashboard</h1>
-        <hr>
-
-        <h4>Hello {{ Auth::user()->name }},</h4>
-        @include('partials.dashboards._committee')
+      @if (Auth::guest())
+        @include('partials._about')
       @else
-	   @include('partials._about')
-    @endif
+        <h1>Dashboard</h1>
+        <hr>
+
+        <h4>Hello {{ Auth::user()->name }},</h4>
+
+        @if(Auth::user()->admin)
+          @include('partials.dashboards._admin')
+        @endif
+
+        @if(Auth::user()->author)
+          @include('partials.dashboards._author')
+        @endif
+
+        @if(Auth::user()->committee)
+          @include('partials.dashboards._committee')
+        @endif
+
+      @endif
 @endsection
