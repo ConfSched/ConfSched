@@ -25,11 +25,14 @@
         <hr>
 
         <h4>Hello {{ Auth::user()->name }},</h4>
+
+        @include('partials.dashboards._author')
       @elseif(! Auth::guest() && Auth::user()->committee)
         <h1>Dashboard</h1>
         <hr>
 
         <h4>Hello {{ Auth::user()->name }},</h4>
+        @include('partials.dashboards._committee')
       @else
 	   @include('partials._about')
     @endif

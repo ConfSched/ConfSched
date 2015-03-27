@@ -54,7 +54,7 @@
 
     <div class="row">
       <div class="col-xs-12">
-        <p><a href="{{ URL::previous() }}" class="btn btn-default"><i class="fa fa-arrow-left"></i> Go Back</a></p>
+        <p><a href="/" class="btn btn-default"><i class="fa fa-arrow-left"></i> Go Back</a></p>
 
         <p>Welcome to the Author Sourcing phase. In this phase, authors will provide feedback on how other papers relate to their own papers. Authors also provide feedback on whether or not they would be interested in seeing the presentation of a paper. This data will assist us in generating better schedules.</p>
       </div>

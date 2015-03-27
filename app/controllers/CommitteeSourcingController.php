@@ -46,24 +46,57 @@ class CommitteeSourcingController extends \BaseController {
 		return Redirect::action('CommitteeSourcingController@getCommitteeSourcing', array('topicid' => $id));
 	}
 
-	public function getPaper() {
-
+	public function getPaper($id) {
+		$paper = Paper::find($id);
+		$topic_id = $paper->topic_id;
+		$categories = Category::whereIn('topic_id', $paper->topics->lists('topicid'))->where('user_id', Auth::user()->id)->get();
+		return View::make('addtocategory', compact('id', 'paper', 'categories'));
 	}
 
-	public function postPaper() {
+	public function postPaper($id) {
+		$validator = Validator::make(Input::all(), array('category_id' => 'required|integer'));
 
+		if ($validator->fails()) {
+			return Redirect::action('CommitteeSourcingController@getPaper', array('id' => $id))->withInput()->withErrors($validator);
+		}
+
+		$map = new CategoryPaperMap;
+		$map->category_id = Input::get('category_id');
+		$map->paper_id = $id;
+		$map->save();
+
+		$topicid = Category::find(Input::get('category_id'))->topic_id;
+
+		return Redirect::action('CommitteeSourcingController@getCommitteeSourcing', array('topicid' => $topicid));
 	}
 
 	public function getRemoveCategory() {
 
 	}
 
-	public function deleteCategory() {
+	public function deleteCategory($id) {
 		$category = Category::find($id);
 		$topicid = $category->topic_id;
 		$category->delete();
 
-		return Redirect::action('ConferenceController@showCommitteeSourcingPage', array('topicid' => $topicid));
+		return Redirect::action('CommitteeSourcingController@getCommitteeSourcing', array('topicid' => $topicid));
+	}
+
+	/**
+	 * Removes a Category Paper mapping
+	 * @param  int $paperid the id of the paper
+	 * @param  int $categoryid the id of the category
+	 * @return Response
+	 */
+	public function deleteCategoryPaperMap($paperid, $categoryid) {
+		$categoryPaperMap = CategoryPaperMap::where('paper_id', $paperid)->where('category_id', $categoryid)->get();
+		foreach($categoryPaperMap as $current) {
+			$current->delete();
+		}
+
+		$topic_id = Category::find($categoryid)->topic_id;
+
+		return Redirect::action('CommitteeSourcingController@getCommitteeSourcing', array('topicid' =>  $topic_id));
 	}
 
 }

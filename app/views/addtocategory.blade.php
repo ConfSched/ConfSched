@@ -11,6 +11,8 @@
 
 	<div class="row">
 		<div class="col-lg-12">
+                <p><a href="{{ URL::previous() }}" class="btn btn-default"><i class="fa fa-arrow-left"></i> Go Back</a></p>
+
 			{{ Form::open(array('class' => 'form', 'method' => 'POST')) }}
 				<div class="row">
 					<div class="col-lg-12">
