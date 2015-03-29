@@ -11,10 +11,7 @@
 |
 */
 
-Route::get('/', function()
-{
-	return View::make('index');
-});
+Route::get('/', 'ConferenceController@getIndex');
 
 Route::get('register', 'UserController@register');
 Route::post('register', 'UserController@processRegister');
@@ -147,3 +144,7 @@ Route::get('populateschedule', function() {
 	// return Redirect::action('ConferenceController@showSchedulePage');
 
 });
+
+Route::get('details/edit', 'ConferenceController@getEditDetails');
+Route::post('details/edit', 'ConferenceController@postEditDetails');
+Route::get('details', 'ConferenceController@getDetails');

@@ -8,7 +8,7 @@ class ConferenceController extends \BaseController {
 	 * Contains the filters for the Controller
 	 */
 	public function __construct() {
-		$this->beforeFilter('auth');
+		$this->beforeFilter('auth', array('except' => 'getIndex'));
 	}
 
 	/**
@@ -682,6 +682,44 @@ class ConferenceController extends \BaseController {
             			$message->from('noreply@cs-sr.academic.roanoke.edu', 'ConfSched');
             		});
             	}
+	}
+
+	public function getEditDetails() {
+		$details = DB::table('details')->first();
+		$name = $details->name;
+		$image = $details->image;
+		$about = $details->about;
+		return View::make('details', compact('name', 'image', 'about'));
+	}
+
+	public function postEditDetails() {
+
+		if (Input::has('conference_name')) {
+			DB::table('details')->update(array('name' => Input::get('conference_name')));
+			//Config::set('site.conference_name', Input::get('conference_name'));
+		}
+		if (Input::has('conference_about')) {
+			DB::table('details')->update(array('about' => Input::get('conference_about')));
+			//Config::set('site.conference_about', Input::get('conference_about'));
+		}
+
+		return Redirect::to('/');
+	}
+
+	public function getDetails() {
+		$details = DB::table('details')->first();
+		$name = $details->name;
+		$image = $details->image;
+		$about = $details->about;
+		return View::make('about', compact('name', 'image', 'about'));
+	}
+
+	public function getIndex() {
+		$details = DB::table('details')->first();
+		$name = $details->name;
+		$image = $details->image;
+		$about = $details->about;
+		return View::make('index', compact('name', 'image', 'about'));
 	}
 
 }

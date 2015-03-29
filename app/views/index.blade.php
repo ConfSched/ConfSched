@@ -14,7 +14,7 @@
       <hr> --}}
 
       @if (Auth::guest())
-        @include('partials._about')
+        @include('partials._about', compact('name', 'about'))
       @else
         <h1>Dashboard</h1>
         <hr>

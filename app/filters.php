@@ -13,7 +13,13 @@
 
 App::before(function($request)
 {
-	//
+	$details = DB::table('details')->first();
+	$name = $details->name;
+	$image = $details->image;
+	$about = $details->about;
+
+	Config::set('site.conference_name', $name);
+	Config::set('site.conference_about', $about);
 });
 
 

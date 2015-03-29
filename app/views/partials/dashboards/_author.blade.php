@@ -4,7 +4,11 @@
 
 <h4>Tasks to do:</h4>
 
-<p><a href="{{ action('AuthorSourcingController@getAuthorSourcing') }}" class="btn btn-lg btn-primary btn-block">Author Sourcing</a></p>
+@if (1 == 0)
+  <p><a href="{{ action('AuthorSourcingController@getAuthorSourcing') }}" class="btn btn-lg btn-primary btn-block">Author Sourcing</a></p>
+@else
+  <p>You have no tasks to complete.</p>
+@endif
 
 <h4>Completed Tasks:</h4>
 
