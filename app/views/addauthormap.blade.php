@@ -24,6 +24,8 @@
 	<h1>Add Author Mapping</h1>
 	<hr>
 
+      <p><a href="{{ URL::previous() }}" class="btn btn-default"><i class="fa fa-arrow-left"></i> Go Back</a></p>
+
 	@if($errors->has())
 		<ul>
 			@foreach($errors->all() as $error)

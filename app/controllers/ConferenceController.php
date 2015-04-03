@@ -8,7 +8,7 @@ class ConferenceController extends \BaseController {
 	 * Contains the filters for the Controller
 	 */
 	public function __construct() {
-		$this->beforeFilter('auth', array('except' => 'getIndex'));
+		//$this->beforeFilter('auth', array('except' => 'getIndex'));
 	}
 
 	/**
@@ -639,18 +639,20 @@ class ConferenceController extends \BaseController {
 
 	public function alertUsersToCreateAccounts() {
 
-		User::truncate();
+		//User::truncate();
 		AuthorMap::truncate();
 
 		//$authors = Authors::all();
 		$committeemembers = Reviewer::all();
 		$author_committee_members = Authors::whereIn('email', $committeemembers->lists('email'))->get();
+		//DBug::DBug($author_committee_members); die();
 		//$committeemembers = Reviewer::whereIn('email', $authors->lists('email'))->get();
 
 		//DBug::DBug($author_committee_members->toArray(), true);
 
-		$conference = DB::connection('openconf')->select("SELECT value FROM config WHERE setting =  'OC_confNameFull'");
-            	$conference = $conference[0]->value;
+		// $conference = DB::connection('openconf')->select("SELECT value FROM config WHERE setting =  'OC_confNameFull'");
+  //           	$conference = $conference[0]->value;
+  		$conference = Config::get('site.conference_name');
 
 		foreach($author_committee_members as $author) {
 			$member = Reviewer::where('email', $author->email)->first();
@@ -661,7 +663,13 @@ class ConferenceController extends \BaseController {
 			});
 		}
 
-            	$authors = Authors::whereNotIn('email', $author_committee_members->lists('email'))->get();
+					if ($author_committee_members->lists('email') != array()) {
+						$authors = Authors::whereNotIn('email', $author_committee_members->lists('email'))->get();
+					}
+					else {
+						$authors = Authors::all();
+					}
+            	//$authors = Authors::whereNotIn('email', $author_committee_members->lists('email'))->get();
 
             	foreach($authors as $author) {
             		//DBug::DBug($author->email);
@@ -673,7 +681,15 @@ class ConferenceController extends \BaseController {
 			});
             	}
 
-            	$committeemembers = Reviewer::where('onprogramcommittee', 'T')->whereNotIn('email', $author_committee_members->lists('email'))->get();
+            	$committeemembers = Reviewer::where('onprogramcommittee', 'T');
+
+            	if ($author_committee_members->lists('email') != array()) {
+            		$committeemembers = $committeemembers->whereNotIn('email', $author_committee_members->lists('email'));
+            	}
+
+            	$committeemembers = $committeemembers->get();
+
+            	//$committeemembers = Reviewer::where('onprogramcommittee', 'T')->whereNotIn('email', $author_committee_members->lists('email'))->get();
 
             	foreach($committeemembers as $member) {
             		Mail::send('emails.registration.committee', compact('member', 'conference'), function($message) use ($member)
@@ -719,7 +735,64 @@ class ConferenceController extends \BaseController {
 		$name = $details->name;
 		$image = $details->image;
 		$about = $details->about;
-		return View::make('index', compact('name', 'image', 'about'));
+		$progress = DB::table('progress')->get();
+		$current_step = DB::table('progress')->where('in_progress', true)->first();
+		//DBug::DBug($progress);
+		//DBug::DBug($current_step);
+		$preplanning = DB::table('progress')->where('stage', 'preplanning')->first();
+		$committeesourcing = DB::table('progress')->where('stage', 'committee sourcing')->first();
+		$authorsourcing = DB::table('progress')->where('stage', 'author sourcing')->first();
+		$scheduling = DB::table('progress')->where('stage', 'scheduling')->first();
+		return View::make('index', compact('name', 'image', 'about', 'current_step', 'preplanning', 'committeesourcing', 'authorsourcing', 'scheduling'));
+	}
+
+	public function finalizePreplanning() {
+		DB::table('progress')->where('stage', 'preplanning')->update(array('completed' => true, 'in_progress' => false));
+
+		// send emails to users
+		$this->alertUsersToCreateAccounts();
+
+		return Redirect::action('ConferenceController@getIndex');
+	}
+
+	public function startCommitteeSourcing() {
+		DB::table('progress')->where('stage', 'committee sourcing')->update(array('in_progress' => true));
+
+		$this->alertUsersCommitteeSourcing();
+
+		return Redirect::action('ConferenceController@getIndex');
+	}
+
+	public function startAuthorSourcing() {
+		DB::table('progress')->where('stage', 'author sourcing')->update(array('in_progress' => true));
+
+		$this->alertUsersAuthorSourcing();
+
+		return Redirect::action('ConferenceController@getIndex');
+	}
+
+	public function alertUsersCommitteeSourcing() {
+		$users = Users::where('committee', true)->get();
+
+		foreach($users as $user) {
+			Mail::send('emails.committeesourcing', compact('user'), function($message) use ($user) {
+				$message->to($user->email);
+				$message->subject('Committee Sourcing');
+				$message->from('noreply@cs-sr.academic.roanoke.edu');
+			});
+		}
+	}
+
+	public function alertUsersAuthorSourcing() {
+		$users = Users::where('author', true)->get();
+
+		foreach($users as $user) {
+			Mail::send('emails.authorsourcing', compact('user'), function($message) use ($user) {
+				$message->to($user->email);
+				$message->subject('Author Sourcing');
+				$message->from('noreply@cs-sr.academic.roanoke.edu');
+			});
+		}
 	}
 
 }

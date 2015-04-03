@@ -9,6 +9,10 @@
 	<h1>Add Author Session Constraint</h1>
 	<hr>
 
+      <p><a href="{{ URL::previous() }}" class="btn btn-default"><i class="fa fa-arrow-left"></i> Go Back</a></p>
+
+      <p>Adding an author session constraint allows you to mark an author as unavailable for a session. We will not schedule the author the given session.</p>
+
 	<div class="row">
 		<div class="col-lg-12">
 			{{ Form::open(array('class' => 'form', 'method' => 'POST')) }}

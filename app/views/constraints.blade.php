@@ -12,7 +12,7 @@
 	<div class="row">
 		<div class="col-lg-12">
 
-                <p><a href="{{ URL::previous() }}" class="btn btn-default"><i class="fa fa-arrow-left"></i> Go Back</a></p>
+                <p><a href="{{ action('ConferenceController@showSchedulePage') }}" class="btn btn-default"><i class="fa fa-arrow-left"></i> Go Back</a></p>
 
                   <p>Here you may add any additional constraints that your schedule may have.</p>
 

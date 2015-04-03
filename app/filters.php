@@ -18,8 +18,11 @@ App::before(function($request)
 	$image = $details->image;
 	$about = $details->about;
 
+	//$current_step = DB::table('progress')->where('completed', '<>', true)->orderBy('id')->first();
+
 	Config::set('site.conference_name', $name);
 	Config::set('site.conference_about', $about);
+	//Config::set('site.current_step', $current_step);
 });
 
 

@@ -4,7 +4,7 @@
 
 <h4>Tasks to do:</h4>
 
-@if (1 == 2)
+@if ($committeesourcing->in_progress)
   <p><a href="{{ action('CommitteeSourcingController@getCommitteeSourcing') }}" class="btn btn-lg btn-primary btn-block">Committee Sourcing</a></p>
 @else
   <p>You have no tasks to complete.</p>
@@ -12,4 +12,8 @@
 
 <h4>Completed Tasks:</h4>
 
-<p>You have not yet completed a task.</p>
+@if ($committeesourcing->completed)
+  <p><i class="fa fa-check-square-o"></i> Committee Sourcing</p>
+@else
+  <p>You have not yet completed a task.</p>
+@endif

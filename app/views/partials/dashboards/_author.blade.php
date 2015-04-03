@@ -4,7 +4,7 @@
 
 <h4>Tasks to do:</h4>
 
-@if (1 == 0)
+@if ($authorsourcing->in_progress)
   <p><a href="{{ action('AuthorSourcingController@getAuthorSourcing') }}" class="btn btn-lg btn-primary btn-block">Author Sourcing</a></p>
 @else
   <p>You have no tasks to complete.</p>
@@ -12,4 +12,8 @@
 
 <h4>Completed Tasks:</h4>
 
-<p>You have not yet completed a task.</p>
+@if($authorsourcing->completed)
+  <p><i class="fa fa-check-square-o"></i> Author Sourcing</p>
+@else
+  <p>You have not yet completed a task.</p>
+@endif
