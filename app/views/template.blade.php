@@ -27,7 +27,7 @@
       </div>
     {{-- <hr> --}}
     <footer class="container-fluid">
-      <p>&copy; ConfSched {{ date('Y') }}</p>
+      <p>&copy; {{ Config::get('site.conference_name') }}</p>
     </footer>
 </body>
 </html>

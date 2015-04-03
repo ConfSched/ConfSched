@@ -9,6 +9,7 @@ class ConferenceController extends \BaseController {
 	 */
 	public function __construct() {
 		$this->beforeFilter('auth', array('except' => 'getIndex'));
+		$this->beforeFilter('auth.admin', array('only' => 'showSchedulePage'));
 	}
 
 	/**
@@ -793,6 +794,24 @@ class ConferenceController extends \BaseController {
 				$message->from('noreply@cs-sr.academic.roanoke.edu');
 			});
 		}
+	}
+
+	public function finalizeCommitteeSourcing() {
+		DB::table('progress')->where('stage', 'committee sourcing')->update(array('completed' => true, 'in_progress' => false));
+
+		return Redirect::action('ConferenceController@getIndex');
+	}
+
+	public function finalizeAuthorSourcing() {
+		DB::table('progress')->where('stage', 'author sourcing')->update(array('completed' => true, 'in_progress' => false));
+
+		return Redirect::action('ConferenceController@getIndex');
+	}
+
+	public function startSchedule() {
+		DB::table('progress')->where('stage', 'scheduling')->update(array('in_progress' => true));
+
+		return Redirect::action('ConferenceController@getIndex');
 	}
 
 }

@@ -16,10 +16,13 @@
   <p><a href="{{ action('ConferenceController@startAuthorSourcing') }}" class="btn btn-lg btn-primary btn-block">Start Author Sourcing</a></p>
 @endif
 @if($committeesourcing->in_progress)
-  <p><a href="{{ action('CommitteeSourcingController@getCommitteeSourcing') }}" class="btn btn-lg btn-primary btn-block">Finalize Committee Sourcing</a></p>
+  <p><a href="{{ action('ConferenceController@finalizeCommitteeSourcing') }}" class="btn btn-lg btn-primary btn-block">Finalize Committee Sourcing</a></p>
 @endif
 @if($authorsourcing->in_progress)
-  <p><a href="{{ action('AuthorSourcingController@getAuthorSourcing') }}" class="btn btn-lg btn-primary btn-block">Finalize Author Sourcing</a></p>
+  <p><a href="{{ action('ConferenceController@finalizeAuthorSourcing') }}" class="btn btn-lg btn-primary btn-block">Finalize Author Sourcing</a></p>
+@endif
+@if($authorsourcing->completed && $committeesourcing->completed && ! $scheduling->in_progress && ! $scheduling->completed)
+  <p><a href="{{ action('ConferenceController@startSchedule') }}" class="btn btn-lg btn-primary btn-block">Start Scheduling</a></p>
 @endif
 @if($scheduling->in_progress)
   <p><a href="{{ action('ConferenceController@showSchedulePage') }}" class="btn btn-lg btn-primary btn-block">Schedule</a></p>
@@ -38,6 +41,9 @@
 @endif
 @if(! $scheduling->in_progress && ! $scheduling->completed)
   <p><a href="{{ action('ConferenceController@showSchedulePage') }}" class="btn btn-lg btn-primary btn-block" disabled>Schedule</a></p>
+@endif
+@if($scheduling->in_progress || $scheduling->completed)
+  <p>No upcoming tasks</p>
 @endif
 
 <h4>Completed Tasks:</h4>
