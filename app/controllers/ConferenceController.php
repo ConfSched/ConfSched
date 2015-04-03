@@ -750,6 +750,8 @@ class ConferenceController extends \BaseController {
 	public function finalizePreplanning() {
 		DB::table('progress')->where('stage', 'preplanning')->update(array('completed' => true, 'in_progress' => false));
 
+		$this->populateAuthorsTable();
+
 		// send emails to users
 		$this->alertUsersToCreateAccounts();
 
