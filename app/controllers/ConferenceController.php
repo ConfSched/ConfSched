@@ -814,4 +814,10 @@ class ConferenceController extends \BaseController {
 		return Redirect::action('ConferenceController@getIndex');
 	}
 
+	public function startPreplanning() {
+		DB::table('progress')->where('stage', 'preplanning')->update(array('in_progress' => true));
+
+		return Redirect::action('ConferenceController@getIndex');
+	}
+
 }

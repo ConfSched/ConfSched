@@ -5,6 +5,9 @@
 <h4>Tasks to do:</h4>
 
 <p><a href="{{ action('ConferenceController@getEditDetails') }}" class="btn btn-lg btn-primary btn-block">Edit Conference Details</a></p>
+@if(! $preplanning->in_progress && ! $preplanning->completed)
+  <p><a href="{{ action('ConferenceController@startPreplanning') }}" class="btn btn-lg btn-primary btn-block">Start Preplanning</a></p>
+@endif
 @if($preplanning->in_progress)
   <p><a href="{{ Config::get('site.openconf_url') }}" class="btn btn-lg btn-primary btn-block">Preplanning phase (OpenConf)</a></p>
   <p><a href="{{ action('ConferenceController@finalizePreplanning') }}" class="btn btn-lg btn-primary btn-block">Finalize Preplanning</a></p>
