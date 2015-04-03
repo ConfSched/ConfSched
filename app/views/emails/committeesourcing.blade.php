@@ -3,8 +3,8 @@
 <head>
 </head>
 <body>
-    <p>Hello {{ $member->name_first }} {{ $member->name_last }},</p>
+    <p>Hello {{ user->name_first }} {{ user->name_last }},</p>
 
-    <p>Author sourcing is open. <a href="#">Click here</a> to go to your dashboard.</p>
+    <p>Committee sourcing is now open. <a href="/">Click here</a> to go to your dashboard.</p>
 </body>
 </html>

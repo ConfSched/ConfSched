@@ -149,3 +149,5 @@ Route::get('details/edit', 'ConferenceController@getEditDetails');
 Route::post('details/edit', 'ConferenceController@postEditDetails');
 Route::get('details', 'ConferenceController@getDetails');
 Route::get('finalizepreplanning', 'ConferenceController@finalizePreplanning');
+Route::get('startcommitteesourcing', 'ConferenceController@startCommitteeSourcing');
+Route::get('startauthorsourcing', 'ConferenceController@startAuthorSourcing');

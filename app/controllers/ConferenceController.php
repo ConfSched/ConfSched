@@ -8,7 +8,7 @@ class ConferenceController extends \BaseController {
 	 * Contains the filters for the Controller
 	 */
 	public function __construct() {
-		//$this->beforeFilter('auth', array('except' => 'getIndex'));
+		$this->beforeFilter('auth', array('except' => 'getIndex'));
 	}
 
 	/**
@@ -772,7 +772,7 @@ class ConferenceController extends \BaseController {
 	}
 
 	public function alertUsersCommitteeSourcing() {
-		$users = Users::where('committee', true)->get();
+		$users = User::where('committee', true)->get();
 
 		foreach($users as $user) {
 			Mail::send('emails.committeesourcing', compact('user'), function($message) use ($user) {
@@ -784,7 +784,7 @@ class ConferenceController extends \BaseController {
 	}
 
 	public function alertUsersAuthorSourcing() {
-		$users = Users::where('author', true)->get();
+		$users = User::where('author', true)->get();
 
 		foreach($users as $user) {
 			Mail::send('emails.authorsourcing', compact('user'), function($message) use ($user) {

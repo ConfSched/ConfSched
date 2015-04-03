@@ -10,10 +10,10 @@
   <p><a href="{{ action('ConferenceController@finalizePreplanning') }}" class="btn btn-lg btn-primary btn-block">Finalize Preplanning</a></p>
 @endif
 @if($preplanning->completed && ! $committeesourcing->in_progress && ! $committeesourcing->completed)
-  <p><a href="#" class="btn btn-lg btn-primary btn-block">Start Committee Sourcing</a></p>
+  <p><a href="{{ action('ConferenceController@startCommitteeSourcing') }}" class="btn btn-lg btn-primary btn-block">Start Committee Sourcing</a></p>
 @endif
 @if($preplanning->completed && ! $authorsourcing->in_progress && ! $authorsourcing->completed)
-  <p><a href="#" class="btn btn-lg btn-primary btn-block">Start Author Sourcing</a></p>
+  <p><a href="{{ action('ConferenceController@startAuthorSourcing') }}" class="btn btn-lg btn-primary btn-block">Start Author Sourcing</a></p>
 @endif
 @if($committeesourcing->in_progress)
   <p><a href="{{ action('CommitteeSourcingController@getCommitteeSourcing') }}" class="btn btn-lg btn-primary btn-block">Finalize Committee Sourcing</a></p>

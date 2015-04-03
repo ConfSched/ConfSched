@@ -22,7 +22,7 @@
 
     {{ Form::open(array('class' => 'form', 'method' => 'POST')) }}
         @if(Input::has('committeeid'))
-            {{ Form::hidden('commiteeid', Input::get('committeeid')) }}
+            {{ Form::hidden('committeeid', Input::get('committeeid')) }}
         @endif
 
         @if(Input::has('authorid'))
