@@ -1,9 +1,9 @@
 <?php
 
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
 
-class CreateUsers extends Migration {
+class CreateAuthorsTable extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -12,16 +12,18 @@ class CreateUsers extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create("users", function($table) {
-			$table->increments("id");
-			$table->string("username", 64);
-			$table->string("password", 64);
-			$table->string("first_name", 64);
+		Schema::create('authors', function(Blueprint $table)
+		{
+			$table->increments('id');
+			$table->string('first_name', 64);
 			$table->string('last_name', 64);
 			$table->string('email');
+			$table->string('organization');
 			$table->timestamps();
+			$table->softDeletes();
 		});
 	}
+
 
 	/**
 	 * Reverse the migrations.
@@ -30,7 +32,7 @@ class CreateUsers extends Migration {
 	 */
 	public function down()
 	{
-		//
+		Schema::drop('authors');
 	}
 
 }

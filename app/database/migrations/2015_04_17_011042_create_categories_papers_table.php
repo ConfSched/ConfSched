@@ -1,9 +1,9 @@
 <?php
 
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
 
-class CreateSessionpaperTable extends Migration {
+class CreateCategoriesPapersTable extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -12,15 +12,16 @@ class CreateSessionpaperTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('sessionpaper', function(Blueprint $table)
+		Schema::create('categories_papers', function(Blueprint $table)
 		{
-			$table->increments("id");
-			$table->integer("session_id");
+			$table->increments('id');
+			$table->integer('category_id');
 			$table->integer('paper_id');
 			$table->timestamps();
 			$table->softDeletes();
 		});
 	}
+
 
 	/**
 	 * Reverse the migrations.
@@ -29,7 +30,7 @@ class CreateSessionpaperTable extends Migration {
 	 */
 	public function down()
 	{
-		//
+		Schema::drop('categories_papers');
 	}
 
 }

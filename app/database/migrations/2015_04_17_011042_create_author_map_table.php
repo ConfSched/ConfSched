@@ -1,7 +1,7 @@
 <?php
 
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
 
 class CreateAuthorMapTable extends Migration {
 
@@ -12,13 +12,15 @@ class CreateAuthorMapTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create("author_map", function($table) {
-			$table->increments("id");
-			$table->integer("author1_id");
-			$table->integer("author2_id");
+		Schema::create('author_map', function(Blueprint $table)
+		{
+			$table->increments('id');
+			$table->integer('author1_id');
+			$table->integer('author2_id');
 			$table->timestamps();
 		});
 	}
+
 
 	/**
 	 * Reverse the migrations.
@@ -27,7 +29,7 @@ class CreateAuthorMapTable extends Migration {
 	 */
 	public function down()
 	{
-		//
+		Schema::drop('author_map');
 	}
 
 }

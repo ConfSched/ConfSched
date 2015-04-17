@@ -1,7 +1,7 @@
 <?php
 
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
 
 class CreateSessionsTable extends Migration {
 
@@ -14,15 +14,16 @@ class CreateSessionsTable extends Migration {
 	{
 		Schema::create('sessions', function(Blueprint $table)
 		{
-			$table->increments("id");
+			$table->increments('id');
 			$table->dateTime('start');
 			$table->dateTime('end');
 			$table->integer('room_id');
-			$table->integer('num_papers');
 			$table->timestamps();
 			$table->softDeletes();
+			$table->integer('num_papers')->nullable();
 		});
 	}
+
 
 	/**
 	 * Reverse the migrations.
@@ -31,7 +32,7 @@ class CreateSessionsTable extends Migration {
 	 */
 	public function down()
 	{
-		//
+		Schema::drop('sessions');
 	}
 
 }

@@ -26,7 +26,7 @@ return array(
 	|
 	*/
 
-	'default' => 'confsched',
+	'default' => $_ENV['db_name'],
 
 	/*
 	|--------------------------------------------------------------------------
@@ -48,7 +48,7 @@ return array(
 		'confsched' => array(
 			'driver'    => 'mysql',
 			'host'      => 'localhost',
-			'database'  => 'confsched',
+			'database'  => $_ENV['db_name'],
 			'username'  => $_ENV['db_username'],
 			'password'  => $_ENV['db_password'],
 			'charset'   => 'utf8',
@@ -58,9 +58,9 @@ return array(
 		'openconf' => array(
 			'driver'    => 'mysql',
 			'host'      => 'localhost',
-			'database'  => 'openconf',
-			'username'  => $_ENV['db_username'],
-			'password'  => $_ENV['db_password'],
+			'database'  => $_ENV['db_openconf_name'],
+			'username'  => $_ENV['db_openconf_username'],
+			'password'  => $_ENV['db_openconf_password'],
 			'charset'   => 'utf8',
 			'collation' => 'utf8_unicode_ci',
 			'prefix'    => '',

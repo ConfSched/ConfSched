@@ -1,7 +1,7 @@
 <?php
 
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
 
 class CreateAuthorFeedbackTable extends Migration {
 
@@ -14,16 +14,18 @@ class CreateAuthorFeedbackTable extends Migration {
 	{
 		Schema::create('author_feedback', function(Blueprint $table)
 		{
-			$table->increments("id");
-			$table->integer("paper1_id");
+			$table->increments('id');
+			$table->integer('paper1_id');
 			$table->integer('paper2_id');
 			$table->integer('user_id');
-			$table->integer('interest');
-			$table->integer('relevant');
 			$table->timestamps();
 			$table->softDeletes();
+			$table->integer('interest')->nullable();
+			$table->integer('relevant')->nullable();
+			$table->dateTime('moved_to_bottom_at')->nullable();
 		});
 	}
+
 
 	/**
 	 * Reverse the migrations.
@@ -32,7 +34,7 @@ class CreateAuthorFeedbackTable extends Migration {
 	 */
 	public function down()
 	{
-		//
+		Schema::drop('author_feedback');
 	}
 
 }

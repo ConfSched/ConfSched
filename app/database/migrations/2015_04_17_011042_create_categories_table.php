@@ -1,7 +1,7 @@
 <?php
 
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
 
 class CreateCategoriesTable extends Migration {
 
@@ -14,14 +14,15 @@ class CreateCategoriesTable extends Migration {
 	{
 		Schema::create('categories', function(Blueprint $table)
 		{
-			$table->increments("id");
-			$table->string("name", 500);
+			$table->increments('id');
+			$table->string('name', 500);
 			$table->integer('user_id');
-			$table->integer('topic_id');
 			$table->timestamps();
 			$table->softDeletes();
+			$table->integer('topic_id')->nullable();
 		});
 	}
+
 
 	/**
 	 * Reverse the migrations.
@@ -30,7 +31,7 @@ class CreateCategoriesTable extends Migration {
 	 */
 	public function down()
 	{
-		//
+		Schema::drop('categories');
 	}
 
 }

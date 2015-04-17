@@ -125,6 +125,7 @@ return array(
 		'Jenssegers\Date\DateServiceProvider',
 		'Maatwebsite\Excel\ExcelServiceProvider',
 		'dlcrush\DBug\DBugServiceProvider',
+		'Xethron\MigrationsGenerator\MigrationsGeneratorServiceProvider'
 	),
 
 	/*
