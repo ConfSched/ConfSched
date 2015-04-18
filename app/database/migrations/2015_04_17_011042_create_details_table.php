@@ -14,9 +14,9 @@ class CreateDetailsTable extends Migration {
 	{
 		Schema::create('details', function(Blueprint $table)
 		{
-			$table->string('name', 500)->primary();
-			$table->string('image', 500)->nullable();
-			$table->string('about', 50000)->nullable();
+			$table->string('name')->primary();
+			$table->string('image')->nullable();
+			$table->longText('about')->nullable();
 		});
 	}
 

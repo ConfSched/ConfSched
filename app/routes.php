@@ -13,6 +13,8 @@
 
 Route::get('/', 'ConferenceController@getIndex');
 
+Route::post('processintall', 'ConferenceController@processInstall');
+
 Route::get('register', 'UserController@register');
 Route::post('register', 'UserController@processRegister');
 Route::get('sendEmailsAuthors', 'ConferenceController@alertUsersToCreateAccounts');

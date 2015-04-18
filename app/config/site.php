@@ -5,7 +5,7 @@ return [
 	/**
 	 * Conference Name
 	 */
-	'conference_name' => 'CJD Conference 2015',
+	'conference_name' => 'ConfSched',
 
 	/**
 	 * URL to openconf installation

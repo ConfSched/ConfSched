@@ -43,7 +43,7 @@
                         {{-- <li>{{ link_to(Config::get('site.openconf_url'), 'OpenConf') }}</li> --}}
                         {{-- <li>{{ link_to('/committeesourcing', 'Committee Sourcing') }}</li>
                         <li>{{ link_to('/authorsourcing', 'Author Sourcing') }}</li> --}}
-                        <li><a href="{{ action('ConferenceController@showSchedulePage') }}"><i class="fa fa-calendar"></i> Schedule</a></li>
+                        {{-- <li><a href="{{ action('ConferenceController@showSchedulePage') }}"><i class="fa fa-calendar"></i> Schedule</a></li> --}}
 				@if(Auth::guest())
 					{{-- <li>{{ link_to('/signup', 'Sign Up') }}</li> --}}
 					{{-- <li>{{ link_to('/login', 'Log In')}}</li> --}}

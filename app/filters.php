@@ -13,15 +13,23 @@
 
 App::before(function($request)
 {
+
 	$details = DB::table('details')->first();
-	$name = $details->name;
-	$image = $details->image;
-	$about = $details->about;
+	if ($details === null) {
+		Config::set('site.installation', true);
+	}
+	else {
+		$name = $details->name;
+		$image = $details->image;
+		$about = $details->about;
+
+		Config::set('site.conference_name', $name); // this is here for some legacy code that used config files
+		Config::set('site.conference_about', $about); // this is here for some legacy code that used config files
+	}
 
 	//$current_step = DB::table('progress')->where('completed', '<>', true)->orderBy('id')->first();
 
-	Config::set('site.conference_name', $name);
-	Config::set('site.conference_about', $about);
+
 	//Config::set('site.current_step', $current_step);
 });
 

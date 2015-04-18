@@ -8,7 +8,7 @@ class ConferenceController extends \BaseController {
 	 * Contains the filters for the Controller
 	 */
 	public function __construct() {
-		$this->beforeFilter('auth', array('except' => 'getIndex'));
+		$this->beforeFilter('auth', array('except' => ['getIndex', 'processInstall']));
 		$this->beforeFilter('auth.admin', array('only' => 'showSchedulePage'));
 	}
 
@@ -166,14 +166,6 @@ class ConferenceController extends \BaseController {
 		$papers = Paper::with('topics')->get();
 		$all_papers = Paper::all();
 
-		// $paper_topics_list = array();
-
-		// foreach($paper->topics as $curr_topic) {
-		// 	array_push($paper_topics_list, $curr_topic->topicid);
-		// }
-
-		// var_dump($paper_topics_list);
-
 		$first_paper_id = Author::where('email', Auth::user()->email)->first()->paperid;
 
 		$paper_id = $first_paper_id;
@@ -205,13 +197,6 @@ class ConferenceController extends \BaseController {
 				}
 			}
 		}
-
-		// foreach($papers as $key => $x) {
-		// 	$feedback = AuthorFeedback::where('paper1_id', $x->paperid)->where('paper2_id', $paper_id)->where('user_id', Auth::user()->id)->get();
-		// 	if (count($feedback) > 0) {
-		// 		unset($papers[$key]);
-		// 	}
-		// }
 
 		$paper_id = PaperAuthor::where('author_id', Auth::user()->author_id)->first()->paper_id;
 
@@ -732,10 +717,14 @@ class ConferenceController extends \BaseController {
 	}
 
 	public function getIndex() {
+		$name = '';
+		$image = '';
+		$about = '';
+
 		$details = DB::table('details')->first();
-		$name = $details->name;
-		$image = $details->image;
-		$about = $details->about;
+		// $name = $details->name;
+		// $image = $details->image;
+		// $about = $details->about;
 		$progress = DB::table('progress')->get();
 		$current_step = DB::table('progress')->where('in_progress', true)->first();
 		//DBug::DBug($progress);
@@ -820,6 +809,34 @@ class ConferenceController extends \BaseController {
 		DB::table('progress')->where('stage', 'preplanning')->update(array('in_progress' => true));
 
 		return Redirect::action('ConferenceController@getIndex');
+	}
+
+	public function processInstall() {
+		$user = new User;
+		$user->first_name = Input::get('first_name');
+		$user->last_name = Input::get('last_name');
+		$user->email = Input::get('email');
+		$user->username = Input::get('username');
+		$user->password = Hash::make(Input::get('password'));
+		$user->author = false;
+		$user->committee = false;
+		$user->admin = true;
+		$user->save();
+
+		Auth::login($user);
+
+		DB::table('details')->insert(['name' => Input::get('conference_name')]);
+
+		DB::table('progress')->insert(
+			[
+				['stage' => 'installation', 'completed' => true, 'in_progress' => false],
+				['stage' => 'preplanning', 'completed' => false, 'in_progress' => false],
+				['stage' => 'committee sourcing', 'completed' => false, 'in_progress' => false],
+				['stage' => 'author sourcing', 'completed' => false, 'in_progress' => false],
+				['stage' => 'scheduling', 'completed' => false, 'in_progress' => false]
+			]);
+
+		return Redirect::to('/');
 	}
 
 }
