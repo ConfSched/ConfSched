@@ -7,3 +7,6 @@ composer.lock
 .DS_Store
 Thumbs.db
 passwords.txt
+/bower_components
+/node_modules
+/.sass-cache
