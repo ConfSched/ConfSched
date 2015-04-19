@@ -12,9 +12,26 @@ You will need the following dependencies:
 * [Apache](https://httpd.apache.org/)
 * [Git](http://git-scm.com/downloads)
 * [Composer](https://getcomposer.org/download/)
-* [NodeJS](https://nodejs.org)
-* [Ruby](https://www.ruby-lang.org/en/downloads/)
+* [NodeJS with npm](https://nodejs.org)
 * [Bower](http://bower.io/#install-bower)
+
+You can follow [this guide](https://www.digitalocean.com/community/tutorials/how-to-install-linux-apache-mysql-php-lamp-stack-on-ubuntu-14-04) to get a LAMP stack consisting of Ubuntu 14.04, Apache, MySQL, and PHP. Development was done using a LAMP stack so this is the recommended setup.
+
+You can follow [this guide](https://www.digitalocean.com/community/tutorials/how-to-install-node-js-on-an-ubuntu-14-04-server) to install NodeJS and npm on Ubuntu 14.04.
+
+To install bower, we use npm. We recommend to install it globally. To do so, run the following:
+
+<code>npm install -g bower</code>
+
+After installing bower, you may run into an issue where you get the following error when running bower:
+
+<code>/usr/bin/env: node: No such file or directory</code>
+
+If you get this error, installing nodejs-legacy will provide a fix. On Ubuntu 14.04, we were able to solve this by running:
+
+<code>sudo apt-get install nodejs-legacy</code>
+
+Once you have all the dependencies isntalled, you can start the installation process.
 
 Run the following:
 
@@ -27,6 +44,10 @@ Switch to the newly cloned project.
 Next, you need to run composer update to grab all the dependencies.
 
 <code>composer update</code>
+
+Depending on your composer installation, you might need to use composer.phar instead:
+
+<code>composer.phar update</code>
 
 Download OpenConf at [http://www.openconf.com/download/](http://www.openconf.com/download/). Follow the installation instructions for OpenConf [here](http://www.openconf.com/documentation/install.php).
 
@@ -63,7 +84,21 @@ Please note: you will need to have the <code>php-mcrypt</code> extension install
 
 Please note: you may run into permission issues where you only get a white screen with Laravel. This is typically caused by the app/storage folder not being writeable by the web server. For more information on this error, see [this](http://stackoverflow.com/questions/20678360/laravel-blank-white-screen).
 
+Next step is to grab all the front end dependencies. For this, we use Grunt and Bower.
 
+<code>npm install</code>
 
+This installs Grunt which we use to automate the build process for our front end code.
+
+<code>bower install</code>
+
+This grabs all of our dependencies through bower.
+
+<code>grunt copy</code>
+<code>grunt sass</code>
+<code>grunt concat</code>
+<code>grunt uglify</code>
+
+This will run our build process that combines all css and js into a single css and js file.
 
 Install instructions for C++ should go here.
