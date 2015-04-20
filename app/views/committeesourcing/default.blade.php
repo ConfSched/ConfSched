@@ -63,7 +63,7 @@ ConfSched | Committee Sourcing
 
 <div class="row">
   <div class="col-xs-12">
-    <p><a href="/" class="btn btn-default"><i class="fa fa-arrow-left"></i> Go Back</a></p>
+    <p><a href="{{ action('ConferenceController@getIndex') }}" class="btn btn-default"><i class="fa fa-arrow-left"></i> Go Back</a></p>
     <p>Welcome to the committee sourcing phase. In the committee sourcing phase, data is collected on how the papers are related. To help us out, committee members create categories and add related papers to those categories. This gives us a grouping of papers and will assist us in the scheduling process.</p>
   </div>
 </div>

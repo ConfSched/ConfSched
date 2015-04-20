@@ -45,7 +45,7 @@ class ConferenceController extends \BaseController {
 		$topic = Topic::find($topic_id);
 		$reviewer = Reviewer::where('email', Auth::user()->email)->first();
 		if (count($reviewer) < 1) {
-			return Redirect::to('/');
+			return Redirect::action('ConferenceController@getIndex');
 		}
 		$topics = $reviewer->topics;
 		//$topics = Topic::all();
@@ -705,7 +705,7 @@ class ConferenceController extends \BaseController {
 			//Config::set('site.conference_about', Input::get('conference_about'));
 		}
 
-		return Redirect::to('/');
+		return Redirect::action('ConferenceController@getIndex');
 	}
 
 	public function getDetails() {
@@ -836,7 +836,7 @@ class ConferenceController extends \BaseController {
 				['stage' => 'scheduling', 'completed' => false, 'in_progress' => false]
 			]);
 
-		return Redirect::to('/');
+		return Redirect::action('ConferenceController@getIndex');
 	}
 
 }

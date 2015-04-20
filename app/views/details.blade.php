@@ -18,7 +18,7 @@
   <hr>
 
   {{ Form::open() }}
-    <p><a href="/" class="btn btn-default"><i class="fa fa-arrow-left"></i> Go Back</a></p>
+    <p><a href="{{ action('ConferenceController@getIndex') }}" class="btn btn-default"><i class="fa fa-arrow-left"></i> Go Back</a></p>
     <div class="form-group">
       <label for="conference_name">Conference Name</label>
       <input type="text" name="conference_name" value="{{ $name }}" class="form-control">
