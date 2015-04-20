@@ -41,19 +41,11 @@ Switch to the newly cloned project.
 
 <code>cd ConfSched</code>
 
-Next, you need to run composer update to grab all the dependencies.
-
-<code>composer update</code>
-
-Depending on your composer installation, you might need to use composer.phar instead:
-
-<code>composer.phar update</code>
-
-Download OpenConf at [http://www.openconf.com/download/](http://www.openconf.com/download/). Follow the installation instructions for OpenConf [here](http://www.openconf.com/documentation/install.php).
-
 Create the database for the ConfSched app. We named the database <code>confsched</code> but you may name it whatever you like.
 
-Now we'll head back to the ConfSched app. You'll need to create the <code>.env.php</code> file. This file will contain sensitive information such as passwords. It is configured in the <code>.gitignore</code> file to not be tracked by Git. Your <code>.env.php</code> file should be in the root folder of your project. 
+<code>create database confsched;</code>
+
+You'll need to create the <code>.env.php</code> file. This file will contain sensitive information such as passwords. It is configured in the <code>.gitignore</code> file to not be tracked by Git. Your <code>.env.php</code> file should be in the root folder of your project. 
 
 You can find documentation on <code>.env.php</code> [here](http://laravel.com/docs/4.2/configuration#protecting-sensitive-configuration). 
 
@@ -75,6 +67,16 @@ Here is an example of what your <code>.env.php</code> file should look like:
 Now we need to create the tables. To do so, we'll use Laravel's Migrations. Run the following command:
 
 <code>php artisan migrate</code>
+
+Next, you need to run composer update to grab all the dependencies.
+
+<code>composer update</code>
+
+Depending on your composer installation, you might need to use composer.phar instead:
+
+<code>composer.phar update</code>
+
+Download OpenConf at [http://www.openconf.com/download/](http://www.openconf.com/download/). Follow the installation instructions for OpenConf [here](http://www.openconf.com/documentation/install.php).
 
 We now need to configure Apache. The file structure of a Laravel application includes a public folder. That is the only folder we want publicly accessible. We don't want Apache to serve up the other folders. In order to achieve this, we take advantage of virtual hosts. We want to create a virtual host that will point to the path to our public folder. The actual implementation will vary from version to version in Apache.
 
@@ -101,4 +103,41 @@ This grabs all of our dependencies through bower.
 
 This will run our build process that combines all css and js into a single css and js file.
 
-Install instructions for C++ should go here.
+If you ever want to modify the Sass or Javascript, you can find these files in the <code>app/assets</code> folder. You'll need to rebuild the code after every change. To make this easier, you can take advantage of Grunt and run the following for autobuild:
+
+<code>grunt</code>
+
+This will listen for any changes and rebuild upon a change.
+
+Open up <code>app/config/site.php</code> and edit the following line to set the url to your OpenConf installation:
+
+<code>'openconf_url' => 'http://path/to/openconf',</code>
+
+To install the C++ back end, navigate to wherever you want to install it (can be anywhere) and run:
+
+<code>git clone https://github.com/ConfSched/Scheduler.git</code>
+
+Next go into the newly created folder,
+
+<code>cd Scheduler</code>
+
+Create a new file named <code>config.h</code> and set the following constants:
+
+```c++
+#ifndef INCLUDED_CONFIG
+#define INCLUDED_CONFIG
+
+#define serverAddress "localhost"
+#define username "<username>"
+#define password "<password>"
+#define dbName "confsched"
+
+#endif
+```
+You can change these values to fit whatever you made them when you set up the confsched database.
+
+Next, run:
+
+<code>make</code>
+
+Now you're good to go!

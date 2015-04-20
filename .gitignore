@@ -10,3 +10,5 @@ passwords.txt
 /bower_components
 /node_modules
 /.sass-cache
+rooms.csv
+socket.php
