@@ -34,7 +34,7 @@
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
                         @if (Auth::guest())
-                          <li><a href="/"><i class='fa fa-home'></i> Home</a></li>
+                          <li><a href="{{ action('ConferenceController@getIndex') }}"><i class='fa fa-home'></i> Home</a></li>
                         @endif
                         @if (! Auth::guest())
                           <li><a href="/"><i class="fa fa-dashboard"></i> Dashboard</a></li>
