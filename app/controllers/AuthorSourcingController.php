@@ -9,7 +9,12 @@ class AuthorSourcingController extends \BaseController {
 
 	public function getAuthorSourcing() {
 		$papers = Paper::with('topics')->get();
-		$first_paper_id = PaperAuthor::where('author_id', Auth::user()->author_id)->first()->paper_id;
+		$first_paper = PaperAuthor::where('author_id', Auth::user()->author_id)->first();
+		if (is_null($first_paper)) {
+			// user has no papers to provide feedback on
+			return Redirect::action('ConferenceController@getIndex');
+		}
+		$first_paper_id = $first_paper->paper_id;
 
 		$paper_id = Input::get('paperid', $first_paper_id);
 		$paper = Paper::find($paper_id);

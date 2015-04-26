@@ -153,6 +153,10 @@ You can change these values to fit whatever you made them when you set up the co
 
 Next, run:
 
+<code>sudo apt-get install libmysqlclient-dev</code>
+
+<code>sudo apt-get install libsqlite3-dev</code>
+
 <code>make</code>
 
 Now you're good to go!
@@ -164,3 +168,5 @@ Please note: you may run into permission issues where you only get a white scree
 We were able to fix the permissions issue by running:
 
 <code>sudo chmod -R 777 app/storage</code>
+
+
