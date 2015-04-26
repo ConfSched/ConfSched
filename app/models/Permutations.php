@@ -1,10 +1,6 @@
 <?php
 
-use Illuminate\Database\Eloquent\SoftDeletingTrait;
-
 class Permutations extends \Eloquent {
-
-	use SoftDeletingTrait;
 
 	protected $fillable = [];
 	protected $table = 'permutations';
