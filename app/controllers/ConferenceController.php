@@ -841,7 +841,7 @@ class ConferenceController extends \BaseController {
 
 	public function generateSchedule() {
 		set_time_limit(0);
-		var_dump(shell_exec('~/Scheduler/.simulate'));
+		var_dump(shell_exec('~/Scheduler/simulated'));
 		echo 'done';
 	}
 
