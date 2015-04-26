@@ -13,7 +13,7 @@ class Permutations extends \Eloquent {
 		return $this->hasMany('Authors', 'id', 'author');
 	}
 
-	public function session() {
+	public function sessions() {
 		return $this->hasMany('Sessions', 'id', 'session');
 	}
 
