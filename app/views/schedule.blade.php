@@ -60,7 +60,7 @@
             {{ DBug::DBug($sessions->toArray()); }}
             <div class="row">
               <?php $i = 0; ?>
-              @foreach($sessions->sessions as $session)
+              @foreach($sessions[0]->sessions as $session)
                 @if($i % 2 == 0)
                   <div class="clearfix visible-xs-block"></div>
                 @elseif($i % 3 == 0)
