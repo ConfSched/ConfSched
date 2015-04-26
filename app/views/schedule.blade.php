@@ -65,6 +65,10 @@
                   <h3>{{ Date::parse($session->start)->format('n/j') }}</h3>
                   <strong>{{Date::parse($session->start)->format('g:i A')}} - {{Date::parse($session->end)->format('g:i A')}}</strong>
                 </div>
+                @foreach($session->authors as $author)
+                  <h5>{{$author->print}}</h5>
+                  {{-- <button class="btn btn-default btn-xs btn-swap" data-paper-id="{{$paper->paperid}}">Swap</button> --}}
+                @endforeach
             @endforeach
 	@endif
 	<!-- content goes here -->
