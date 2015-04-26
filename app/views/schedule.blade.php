@@ -52,7 +52,7 @@
 				@if(count($rooms) < 1)
 					<a href="#" class="btn btn-lg btn-primary btn-block" style="margin-bottom: 10px;" disabled>Generate Schedule</a>
 				@else
-					<a href="populateschedule" class="btn btn-lg btn-primary btn-block" style="margin-bottom: 10px;">Generate</a>
+					<a href="{{ action('ConferenceController@generateSchedule') }}" class="btn btn-lg btn-primary btn-block" style="margin-bottom: 10px;">Generate</a>
 				@endif
 			</div>
 		</div>

@@ -839,4 +839,9 @@ class ConferenceController extends \BaseController {
 		return Redirect::action('ConferenceController@getIndex');
 	}
 
+	public function generateSchedule() {
+		set_time_limit(0);
+		shell_exec('~/Scheduler/.simulate');
+	}
+
 }

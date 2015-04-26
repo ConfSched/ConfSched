@@ -157,3 +157,5 @@ Route::get('finishcommitteesourcing', 'ConferenceController@finalizeCommitteeSou
 Route::get('finishauthorsourcing', 'ConferenceController@finalizeAuthorSourcing');
 Route::get('startschedule', 'ConferenceController@startSchedule');
 Route::get('startpreplanning', 'ConferenceController@startPreplanning');
+
+Route::get('generateSchedule', 'ConferenceController@generateSchedule');
