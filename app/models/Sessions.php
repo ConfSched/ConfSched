@@ -23,7 +23,7 @@ class Sessions extends \Eloquent {
 	}
 
 	public function authors() {
-		return $this->hasManyThrough('Authors', 'Permutations', 'author', 'session');
+		return $this->belongsToMany('Authors', 'Permutations', 'author', 'session');
 	}
 
 }
