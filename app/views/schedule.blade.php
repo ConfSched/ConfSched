@@ -60,7 +60,8 @@
             {{ DBug::DBug($sessions->toArray()); }}
             <div class="row">
               <?php $i = 0; ?>
-              @foreach($sessions[0]->sessions as $session)
+              @foreach($sessions as $x)
+                @foreach($x->sessions as $session)
                 @if($i % 2 == 0)
                   <div class="clearfix visible-xs-block"></div>
                 @elseif($i % 3 == 0)
@@ -76,6 +77,7 @@
                       <h5>{{$author->print}}</h5>
                       {{-- <button class="btn btn-default btn-xs btn-swap" data-paper-id="{{$paper->paperid}}">Swap</button> --}}
                     @endforeach
+                  @endforeach
                   </div>
                   <?php $i ++; ?>
               @endforeach
