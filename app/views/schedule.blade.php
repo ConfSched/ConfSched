@@ -23,7 +23,7 @@
 	<h1>Schedule</h1>
 	<hr>
 
-	@if(count($sessions) < 1 || true)
+	@if(count($sessions) < 1)
           <div class="row">
             <div class="col-xs-12">
               <p><a href="{{ action('ConferenceController@getIndex') }}" class="btn btn-default"><i class="fa fa-arrow-left"></i> Go Back</a></p>
@@ -57,7 +57,8 @@
 			</div>
 		</div>
 	@else
-		<input type="hidden" id="paper1">
+            {{ DBug::DBug($sessions->toArray()); }}
+		{{-- <input type="hidden" id="paper1">
 		<div class="row">
 			<?php $i = 0; ?>
 			@foreach($sessions as $session)
@@ -81,7 +82,7 @@
 				<!-- <div class="clearfix visible-xs-block"></div> -->
 			@endforeach
 		</div>
-		<br>
+		<br> --}}
 	@endif
 	<!-- content goes here -->
 
