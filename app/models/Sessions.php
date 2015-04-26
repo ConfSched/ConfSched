@@ -21,5 +21,9 @@ class Sessions extends \Eloquent {
 	public function getDisplayValueAttribute() {
 		return Date::parse($this->start)->format('n/j') . ' ' . Date::parse($this->start)->format('g:i A') . ' - ' . Date::parse($this->end)->format('g:i A') . ' ' . $this->room->room;
 	}
-	
+
+	public function auhors() {
+		return $this->hasManyThrough('Author', 'Permutations', 'author', 'session');
+	}
+
 }
