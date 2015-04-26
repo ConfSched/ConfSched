@@ -328,7 +328,7 @@ class ConferenceController extends \BaseController {
 
 	public function showSchedulePage() {
 		$rooms = Room::all();
-		$sessions = Permutations::with('authors', 'sessions.authors')->groupBy('permutation_id');
+		$sessions = Permutations::groupBy('permutation_id')->with('authors', 'sessions.authors')->get();
 		return View::make('schedule', compact('rooms', 'sessions'));
 	}
 
