@@ -22,7 +22,7 @@ class Sessions extends \Eloquent {
 		return Date::parse($this->start)->format('n/j') . ' ' . Date::parse($this->start)->format('g:i A') . ' - ' . Date::parse($this->end)->format('g:i A') . ' ' . $this->room->room;
 	}
 
-	public function auhors() {
+	public function authors() {
 		return $this->hasManyThrough('Author', 'Permutations', 'author', 'session');
 	}
 
