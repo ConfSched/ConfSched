@@ -10,11 +10,11 @@ class Permutations extends \Eloquent {
 	protected $primaryKey = null;
 
 	public function authors() {
-		return $this->hasMany('Authors', 'author', 'id');
+		return $this->hasMany('Authors', 'id', 'author');
 	}
 
 	public function session() {
-		return $this->hasMany('Sessions', 'session', 'id');
+		return $this->hasMany('Sessions', 'id', 'session');
 	}
 
 }
