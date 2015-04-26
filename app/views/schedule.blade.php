@@ -60,25 +60,26 @@
             {{-- DBug::DBug($sessions->toArray()); --}}
             <div class="row">
               <?php $i = 0; ?>
-            @foreach($sessions[0]->sessions as $session)
+              @foreach($sessions[0]->sessions as $session)
                 @if($i % 2 == 0)
-                <div class="clearfix visible-xs-block"></div>
-              @elseif($i % 3 == 0)
-                <div class="clearfix visible-sm-block visible-md-block"></div>
-              @elseif ($i % 4 == 0)
-                <div class="clearfix visible-lg-block"></div>
-              @endif
-                <div class="col-xs-6 col-sm-4 col-md-4 col-lg-3">
-                  <h3>{{ Date::parse($session->start)->format('n/j') }}</h3>
-                  <strong>{{Date::parse($session->start)->format('g:i A')}} - {{Date::parse($session->end)->format('g:i A')}}</strong>
-                <hr style="margin-bottom: 0; margin-top: 0;">
-                @foreach($session->authors as $author)
-                  <h5>{{$author->print}}</h5>
-                  {{-- <button class="btn btn-default btn-xs btn-swap" data-paper-id="{{$paper->paperid}}">Swap</button> --}}
-                @endforeach
-                </div>
-                <?php $i ++; ?>
-            @endforeach
+                  <div class="clearfix visible-xs-block"></div>
+                @elseif($i % 3 == 0)
+                  <div class="clearfix visible-sm-block visible-md-block"></div>
+                @elseif ($i % 4 == 0)
+                  <div class="clearfix visible-lg-block"></div>
+                @endif
+                  <div class="col-xs-6 col-sm-4 col-md-4 col-lg-3">
+                    <h3>{{ Date::parse($session->start)->format('n/j') }}</h3>
+                    <strong>{{Date::parse($session->start)->format('g:i A')}} - {{Date::parse($session->end)->format('g:i A')}}</strong>
+                    <hr style="margin-bottom: 0; margin-top: 0;">
+                    @foreach($session->authors as $author)
+                      <h5>{{$author->print}}</h5>
+                      {{-- <button class="btn btn-default btn-xs btn-swap" data-paper-id="{{$paper->paperid}}">Swap</button> --}}
+                    @endforeach
+                  </div>
+                  <?php $i ++; ?>
+              @endforeach
+            </div>
 	@endif
 	<!-- content goes here -->
 
