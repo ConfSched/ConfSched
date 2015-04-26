@@ -60,7 +60,12 @@
             {{ DBug::DBug($sessions->toArray()); }}
             <div class="row">
 
-
+            @foreach($sessions[0]->sessions as $session)
+                <div class="col-xs-6 col-sm-4 col-md-4 col-lg-3">
+                  <h3>{{ Date::parse($session->start)->format('n/j') }}</h3>
+                  <strong>{{Date::parse($session->start)->format('g:i A')}} - {{Date::parse($session->end)->format('g:i A')}}</strong>
+                </div>
+            @endforeach
 	@endif
 	<!-- content goes here -->
 
