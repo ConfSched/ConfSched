@@ -58,32 +58,6 @@
 		</div>
 	@else
             {{ DBug::DBug($sessions->toArray()); }}
-		{{-- <input type="hidden" id="paper1">
-		<div class="row">
-			<?php $i = 0; ?>
-			@foreach($sessions as $session)
-				@if($i % 2 == 0)
-					<div class="clearfix visible-xs-block"></div>
-				@elseif($i % 3 == 0)
-					<div class="clearfix visible-sm-block visible-md-block"></div>
-				@elseif ($i % 4 == 0)
-					<div class="clearfix visible-lg-block"></div>
-				@endif
-				<div class="col-xs-6 col-sm-4 col-md-4 col-lg-3">
-					<h3>{{ Date::parse($session->start)->format('n/j') }}</h3>
-					<strong>{{Date::parse($session->start)->format('g:i A')}} - {{Date::parse($session->end)->format('g:i A')}}</strong>
-					<hr style="margin-bottom: 0; margin-top: 0;">
-					@foreach($session->papers as $paper)
-						<h5>{{$paper->title}}</h5>
-						<button class="btn btn-default btn-xs btn-swap" data-paper-id="{{$paper->paperid}}">Swap</button>
-					@endforeach
-				</div>
-				<?php $i ++; ?>
-				<!-- <div class="clearfix visible-xs-block"></div> -->
-			@endforeach
-		</div>
-		<br> --}}
 	@endif
-	<!-- content goes here -->
 
 @endsection
