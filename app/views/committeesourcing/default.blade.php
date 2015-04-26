@@ -5,7 +5,7 @@ ConfSched | Committee Sourcing
 @endsection
 
 @section('navigation')
-@include('navigation')
+  @include('partials._navigation')
 @endsection
 
 @section('content')

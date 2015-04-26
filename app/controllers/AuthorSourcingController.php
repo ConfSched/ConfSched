@@ -12,6 +12,7 @@ class AuthorSourcingController extends \BaseController {
 		$first_paper = PaperAuthor::where('author_id', Auth::user()->author_id)->first();
 		if (is_null($first_paper)) {
 			// user has no papers to provide feedback on
+			// TODO: add flash message telling user that they have no papers to review
 			return Redirect::action('ConferenceController@getIndex');
 		}
 		$first_paper_id = $first_paper->paper_id;
