@@ -333,7 +333,7 @@ class ConferenceController extends \BaseController {
 			$permutation_id = Input::get('permutation_id', $permutations[0]->permutation_id);
 			$sessions = Permutations::where('permutation_id', $permutation_id)->with('authors', 'sessions.authors')->get();
 			$conflicts = DB::table('conflicts')->where('permutation_id', $permutation_id)->first();
-			DBug::DBug($conflicts);
+			DBug::DBug($conflicts); die();
 			$conflicts = $conflicts->num_conflicts;
 		}
 		else {
