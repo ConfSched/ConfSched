@@ -8,7 +8,7 @@
 				<span class="icon-bar"></span>
 				<span class="icon-bar"></span>
 			</button>
-			<a class="navbar-brand" href="/"><img src="{{ asset(Config::get('site.conference_logo')) }}" class="logo img-responsive"></a>
+			<a class="navbar-brand" href="{{ action('ConferenceController@getIndex') }}"><img src="{{ asset(Config::get('site.conference_logo')) }}" class="logo img-responsive"></a>
 		</div>
 		<div class="navbar-collapse collapse">
 			<ul class="nav navbar-nav">
