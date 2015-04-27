@@ -800,6 +800,8 @@ class ConferenceController extends \BaseController {
 		set_time_limit(0);
 		var_dump(shell_exec('/home/cjdresearch/Scheduler/simulated'));
 		echo 'done';
+
+		return Redirect::action('ConferenceController@showSchedulePage');
 	}
 
 }
