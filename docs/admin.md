@@ -21,6 +21,8 @@ You will need the following dependencies:
 
 You can follow [this guide](https://www.digitalocean.com/community/tutorials/how-to-install-linux-apache-mysql-php-lamp-stack-on-ubuntu-14-04) to get a LAMP stack consisting of Ubuntu 14.04, Apache, MySQL, and PHP. Development was done using a LAMP stack so this is the recommended setup.
 
+Note: We edited the /etc/apache2/envvars file to set the group and user for apache to use.
+
 You can follow [this guide](https://www.digitalocean.com/community/tutorials/how-to-install-node-js-on-an-ubuntu-14-04-server) to install NodeJS and npm on Ubuntu 14.04.
 
 To install bower, we use npm. We recommend to install it globally. To do so, run the following:
@@ -47,15 +49,22 @@ Once you have all the dependencies installed, you can start the installation pro
 
 Create the database for the ConfSched app. We named the database <code>confsched</code> but you may name it whatever you like.
 
+First, start up mysql:
+
+<code> mysql -u <username> -p</code>
+
+Inside of mysql, run the following to create the database:
 <code>create database confsched;</code>
 
-After the database has been created, run the following:
+After the database has been created, run the following in the root of your web folder (or whever you want it to go):
 
 <code>git clone https://github.com/ConfSched/ConfSched.git</code>
 
 Switch to the newly cloned project.
 
 <code>cd ConfSched</code>
+
+Note: From here on out, all file paths are assumed to be relative to the ConfSched directory unless otherwise noted.
 
 You'll need to create the <code>.env.php</code> file. This file will contain sensitive information such as passwords. It is configured in the <code>.gitignore</code> file to not be tracked by Git. Your <code>.env.php</code> file should be in the root folder of your project. 
 
@@ -76,17 +85,17 @@ Here is an example of what your <code>.env.php</code> file should look like:
 ?>
 ```
 
-Next, you need to run composer update to grab all the dependencies.
+Next, you need to run composer update to grab all the dependencies. Run this in the root of your ConfSched folder.
 
 <code>composer update</code>
 
 Depending on your composer installation, you might need to use composer.phar instead:
 
-<code>sudo composer.phar update</code>
+<code>composer.phar update</code>
 
 Now we'll create the tables for the database. To do so, we'll use Laravel's Migrations. Run the following command:
 
-<code>sudo php artisan migrate</code>
+<code>php artisan migrate</code>
 
 Download OpenConf at [http://www.openconf.com/download/](http://www.openconf.com/download/). Follow the installation instructions for OpenConf [here](http://www.openconf.com/documentation/install.php).
 
@@ -108,7 +117,7 @@ This installs Grunt which we use to automate the build process for our front end
 
 <code>bower install jquery</code>
 
-This grabs all of our dependencies through bower.
+This is the build process. This grabs all of our dependencies through bower. So you'll need to run the following:
 
 <code>grunt copy</code>
 
@@ -118,9 +127,7 @@ This grabs all of our dependencies through bower.
 
 <code>grunt uglify</code>
 
-This will run our build process that combines all css and js into a single css and js file.
-
-If you ever want to modify the Sass or Javascript, you can find these files in the <code>app/assets</code> folder. You'll need to rebuild the code after every change. To make this easier, you can take advantage of Grunt and run the following for autobuild:
+If you ever want to modify the Sass or Javascript, you can find these files in the <code>app/assets</code> folder. You'll need to rebuild the code using the above commands after every change. To make this easier, you can take advantage of Grunt and run the following for autobuild:
 
 <code>grunt</code>
 
@@ -138,7 +145,7 @@ Next go into the newly created folder,
 
 <code>cd Scheduler</code>
 
-Create a new file named <code>config.h</code> and set the following constants:
+Create a new file named <code>config.h</code> in the Scheduler directory and set the following constants:
 
 ```cpp
 #ifndef INCLUDED_CONFIG
@@ -153,19 +160,17 @@ Create a new file named <code>config.h</code> and set the following constants:
 ```
 You can change these values to fit whatever you made them when you set up the confsched database.
 
-Next, run:
+Next, run this in your Scheduler directory:
 
 <code>make</code>
 
+Last you need to edit <code>app/config/site.php</code> to update the <code>Scheduler_cmd</code> constant to be the command to run the simulator program.
+
 Now you're good to go!
 
-Before deploying live, be sure to edit <code>app/config/app.php</code> and set <code>'debug' => 'false'</code>.
+Before deploying live, be sure to edit <code>app/config/app.php</code> (in your ConfSched folder) and set <code>'debug' => 'false'</code>.
 
 Please note: you may run into permission issues where you only get a white screen with Laravel. This is typically caused by the app/storage folder not being writeable by the web server. For more information on this error, see [this](http://stackoverflow.com/questions/20678360/laravel-blank-white-screen).
-
-We were able to fix the permissions issue by running:
-
-<code>sudo chmod -R 777 app/storage</code>
 
 ## About ConfSched
 
@@ -219,7 +224,7 @@ Admins can also specify that certain authors are unavailable at certain sessions
 
 Admins can also map author accounts to other author accounts. This is helpful because authors are identified by email. If a author used multiple emails during the preplanning phase, they will have multiple author accounts (one for each email). This is fine during the other steps but we becomes a problem when generating a schedule. So the admin can go in and map accounts together. This will go through and replace any reference ot the map account with the account marked as the master. This information is stored in the <code>author_map</code> table.
 
-The actual schedule is generated by making a call to the C++ program. The web app will execute the C++ program and wait until it gets a response back. Once it gets a response back, it will pull the data written in <code>schedule_data</code> and <code>schedules</code> tables by the C++ program.
+The actual schedule is generated by making a call to the C++ program. The web app will execute the C++ program and wait until it gets a response back. Once it gets a response back, it will pull the data written in <code>permutations</code> and <code>conflicts</code> tables by the C++ program.
 
 ## Database Guide
 
