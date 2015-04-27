@@ -57,6 +57,20 @@
 			</div>
 		</div>
 	@else
+          <div class="row">
+            <div class="col-xs-12 col-md-6">
+              <form class="form" id="permutations_form">
+                  <div class="form-group">
+                    <label for="permutation">Permutation:</label>
+                    <select name="permutation" id="permutation" class="form-control">
+                      @foreach($permutations as $permutation)
+                        <option>Permutation #{{ $permutation->permutation_id}}</option>
+                    </select>
+                  </div>
+              </form>
+            </div>
+          </div>
+
             {{-- DBug::DBug($sessions->toArray()); --}}
             <div class="row">
               <h3>Num Conflicts: {{ $conflicts }}</h3>
