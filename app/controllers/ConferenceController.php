@@ -328,7 +328,7 @@ class ConferenceController extends \BaseController {
 
 	public function showSchedulePage() {
 		$rooms = Room::all();
-		$permutations = Permutations::all();
+		$permutations = Permutations::distinct()->select('permutation_id')->orderBy('permutation_id')->get();
 		if (! $permutations->isEmpty()) {
 			$permutation_id = Input::get('permutation_id', $permutations[0]->permutation_id);
 			$sessions = Permutations::where('permutation_id', $permutation_id)->with('authors', 'sessions.authors')->get();
