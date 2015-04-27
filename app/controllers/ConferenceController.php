@@ -329,7 +329,7 @@ class ConferenceController extends \BaseController {
 	public function showSchedulePage() {
 		$rooms = Room::all();
 		$permutations = Permutations::all();
-		var_dump($permutations); die();
+		var_dump($permutations->isEmpty()); die();
 		if (! is_null($permutations)) {
 			$sessions = Permutations::where('permutation_id', $permutations[0]->permutation_id)->with('authors', 'sessions.authors')->get();
 		}
