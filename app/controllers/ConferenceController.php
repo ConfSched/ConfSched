@@ -798,6 +798,8 @@ class ConferenceController extends \BaseController {
 
 	public function generateSchedule() {
 		set_time_limit(0);
+		error_reporting(E_ALL);
+		ini_set('display_errors', 1);
 		exec('/home/cjdresearch/Scheduler/simulated');
 		echo 'done';
 
