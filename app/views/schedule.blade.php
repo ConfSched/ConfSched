@@ -73,7 +73,11 @@
                     <label for="permutation">Permutation:</label>
                     <select name="permutation_id" id="permutation" class="form-control">
                       @foreach($permutations as $permutation)
-                        <option value="{{$permutation->permutation_id}}">Permutation #{{ $permutation->permutation_id}}</option>
+                        @if(Input::get('permutation_id', '') == $permutation->permutation_id)
+                          <option value="{{$permutation->permutation_id}}" selected="selected">Permutation #{{ $permutation->permutation_id}}</option>
+                        @else
+                          <option value="{{$permutation->permutation_id}}">Permutation #{{ $permutation->permutation_id}}</option>
+                        @endif
                       @endforeach
                     </select>
                   </div>
