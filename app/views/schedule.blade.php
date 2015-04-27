@@ -57,14 +57,22 @@
 			</div>
 		</div>
 	@else
+          <script>
+            $(function() {
+              $('#permutation').on('change', function() {
+                $(this).parent('form').submit();
+              });
+            });
+          </script>
+
           <div class="row">
             <div class="col-xs-12 col-md-6">
-              <form class="form" id="permutations_form">
+              <form class="form" id="permutations_form" method="GET">
                   <div class="form-group">
                     <label for="permutation">Permutation:</label>
                     <select name="permutation" id="permutation" class="form-control">
                       @foreach($permutations as $permutation)
-                        <option>Permutation #{{ $permutation->permutation_id}}</option>
+                        <option value="{{$permutation->permutation_id}}">Permutation #{{ $permutation->permutation_id}}</option>
                       @endforeach
                     </select>
                   </div>
