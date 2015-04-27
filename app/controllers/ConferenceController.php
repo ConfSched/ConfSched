@@ -330,7 +330,8 @@ class ConferenceController extends \BaseController {
 		$rooms = Room::all();
 		$permutations = Permutations::all();
 		if (! $permutations->isEmpty()) {
-			$sessions = Permutations::where('permutation_id', $permutations[0]->permutation_id)->with('authors', 'sessions.authors')->get();
+			$permutation_id = Input::get('permutation_id', $permutations[0]->permutation_id);
+			$sessions = Permutations::where('permutation_id', $permutation_id)->with('authors', 'sessions.authors')->get();
 		}
 		else {
 			$sessions = null;
