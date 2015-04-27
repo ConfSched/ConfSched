@@ -60,6 +60,7 @@
           <script>
             $(function() {
               $('#permutation').on('change', function() {
+                console.log('changed');
                 $(this).parent('form').submit();
               });
             });
