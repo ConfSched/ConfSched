@@ -15,6 +15,8 @@ return [
 	/**
 	 * Path to conference logo (Logo needs to be in public folder to be accessible)
 	 */
-	'conference_logo' => '/assets/images/confsched.png'
+	'conference_logo' => '/assets/images/confsched.png',
+
+	'scheduler_cmd' => '/home/cjdresearch/Scheduler/simulated'
 
 ];

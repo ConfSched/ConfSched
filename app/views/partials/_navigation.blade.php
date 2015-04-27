@@ -37,7 +37,7 @@
                           <li><a href="{{ action('ConferenceController@getIndex') }}"><i class='fa fa-home'></i> Home</a></li>
                         @endif
                         @if (! Auth::guest())
-                          <li><a href="/"><i class="fa fa-dashboard"></i> Dashboard</a></li>
+                          <li><a href="{{ action('ConferenceController@getIndex') }}"><i class="fa fa-dashboard"></i> Dashboard</a></li>
                           <li><a href="{{ action('ConferenceController@getDetails') }}"><i class="fa fa-info-circle"></i> About</a></li>
                         @endif
                         {{-- <li>{{ link_to(Config::get('site.openconf_url'), 'OpenConf') }}</li> --}}
