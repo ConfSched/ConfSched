@@ -71,7 +71,7 @@
               <form method="GET">
                   <div class="form-group">
                     <label for="permutation">Permutation:</label>
-                    <select name="permutation" id="permutation" class="form-control">
+                    <select name="permutation_id" id="permutation" class="form-control">
                       @foreach($permutations as $permutation)
                         <option value="{{$permutation->permutation_id}}">Permutation #{{ $permutation->permutation_id}}</option>
                       @endforeach
