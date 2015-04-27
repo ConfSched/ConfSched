@@ -59,6 +59,8 @@
 	@else
             {{-- DBug::DBug($sessions->toArray()); --}}
             <div class="row">
+              <h3>Num Conflicts: {{ $conficts }}</h3>
+
               <?php $i = 0; ?>
               @foreach($sessions as $x)
                 <?php $authors = $x->authors; ?>

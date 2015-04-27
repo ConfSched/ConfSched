@@ -332,11 +332,14 @@ class ConferenceController extends \BaseController {
 		if (! $permutations->isEmpty()) {
 			$permutation_id = Input::get('permutation_id', $permutations[0]->permutation_id);
 			$sessions = Permutations::where('permutation_id', $permutation_id)->with('authors', 'sessions.authors')->get();
+			$conflicts = DB::table('conflicts')->where('permutation_id', $permutation_id)->first();
+			$conflicts = $conflicts->num_conflicts;
 		}
 		else {
 			$sessions = null;
+			$conflicts = null;
 		}
-		return View::make('schedule', compact('rooms', 'sessions'));
+		return View::make('schedule', compact('rooms', 'sessions', 'conflicts'));
 	}
 
 	public function showAddRoomsPage() {
