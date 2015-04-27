@@ -57,7 +57,7 @@
 			</div>
 		</div>
 	@else
-            {{ DBug::DBug($sessions->toArray()); }}
+            {{-- DBug::DBug($sessions->toArray()); --}}
             <div class="row">
               <?php $i = 0; ?>
               @foreach($sessions as $x)
