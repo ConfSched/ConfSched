@@ -61,6 +61,7 @@
             <div class="row">
               <?php $i = 0; ?>
               @foreach($sessions as $x)
+                <?php $authors = $x->authors; ?>
                 @foreach($x->sessions as $session)
                 @if($i % 2 == 0)
                   <div class="clearfix visible-xs-block"></div>
@@ -73,7 +74,7 @@
                     <h3>{{ Date::parse($session->start)->format('n/j') }}</h3>
                     <strong>{{Date::parse($session->start)->format('g:i A')}} - {{Date::parse($session->end)->format('g:i A')}}</strong>
                     <hr style="margin-bottom: 0; margin-top: 0;">
-                    @foreach($session->authors as $author)
+                    @foreach($authors as $author)
                       <h5>{{$author->print}}</h5>
                       {{-- <button class="btn btn-default btn-xs btn-swap" data-paper-id="{{$paper->paperid}}">Swap</button> --}}
                     @endforeach
