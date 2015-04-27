@@ -17,6 +17,9 @@ return [
 	 */
 	'conference_logo' => '/assets/images/confsched.png',
 
+	/**
+	 * Command to trigger on generate
+	 */
 	'scheduler_cmd' => '/home/cjdresearch/Scheduler/simulated'
 
 ];

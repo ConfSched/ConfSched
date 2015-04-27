@@ -152,6 +152,11 @@ class ConferenceController extends \BaseController {
 		return Redirect::action('ConferenceController@showCommitteeSourcingPage', array('topicid' =>  $topic_id));
 	}
 
+	/**
+	 * Gets Papers by author
+	 * @param  int $id
+	 * @return Response
+	 */
 	public function getAuthorPapers($id) {
 
 		$user = User::find($id);
@@ -162,6 +167,11 @@ class ConferenceController extends \BaseController {
 		return Response::json($papers->toJson(), 200);
 	}
 
+	/**
+	 * Gets Author Sourcing Papers
+	 * @param  mixed $paperid
+	 * @return Response
+	 */
 	public function getAuthorSourcingPapers($paperid='') {
 		$papers = Paper::with('topics')->get();
 		$all_papers = Paper::all();
@@ -218,61 +228,17 @@ class ConferenceController extends \BaseController {
 		return Response::json($papers, 200);
 	}
 
+	/**
+	 * Shows Author Sourcing Page
+	 * @return Response
+	 */
 	public function showAuthorSourcingPage(){
 		$papers = Paper::with('topics')->get();
-		// $all_papers = Paper::all();
 
-		// $paper_topics_list = array();
-
-		// foreach($paper->topics as $curr_topic) {
-		// 	array_push($paper_topics_list, $curr_topic->topicid);
-		// }
-
-		// var_dump($paper_topics_list);
-
-		//$first_paper_id = Author::where('authorid', Auth::user()->author_id)->first()->paperid;
 		$first_paper_id = PaperAuthor::where('author_id', Auth::user()->author_id)->first()->paper_id;
 
 		$paper_id = Input::get('paperid', $first_paper_id);
 		$paper = Paper::find($paper_id);
-
-		// $papers_array = array();
-
-		// foreach($papers as $current) {
-		// 	foreach($current->topics as $topic) {
-		// 		if (in_array($topic->topicid, $paper->topics->lists('topicid'))) {
-		// 			if (!in_array(Auth::user()->email, $current->authors->lists('email'))) {
-		// 				array_push($papers_array, $current);
-		// 			}
-		// 		}
-		// 	}
-		// }
-
-		// $papers = $papers_array;
-
-		// $user_papers = array();
-
-		// foreach($all_papers as $current) {
-		// 	foreach($current->authors as $author) {
-		// 		if ($author->email == Auth::user()->email) {
-		// 			array_push($user_papers, $current);
-		// 		}
-		// 	}
-		// }
-
-		// foreach($papers as $key => $x) {
-		// 	$feedback = AuthorFeedback::where('paper1_id', $x->paperid)->where('paper2_id', $paper_id)->where('user_id', Auth::user()->id)->get();
-		// 	if (count($feedback) > 0) {
-		// 		unset($papers[$key]);
-		// 	}
-		// }
-
-		// foreach($papers_array as $x) {
-		// 	var_dump($x->toArray());
-		// 	echo '<hr>';
-		// }
-
-		// die();
 
 		$user_papers = PaperAuthor::where('author_id', Auth::user()->author_id)->get();
 
@@ -285,12 +251,22 @@ class ConferenceController extends \BaseController {
 		return View::make('authorsourcing', compact('paper', 'papers', 'user_papers', 'paper_id'));
 	}
 
+	/**
+	 * Show Provide Feedback page
+	 * @return Response
+	 */
 	public function showProvideFeedbackPage() {
 		$paper1 = Paper::find(Input::get('paper1'));
 		$paper2 = Paper::find(Input::get('paper2'));
 		return View::make('paperfeedback', compact('paper1', 'paper2'));
 	}
 
+	/**
+	 * Save Author Feedback
+	 * @param  int $paper1
+	 * @param  int $paper2
+	 * @return Response
+	 */
 	public function authorfeedback($paper1, $paper2) {
 		$validator = Validator::make(Input::all(), array('relevant' => 'required|integer', 'interest' => 'required|integer'));
 
@@ -314,6 +290,14 @@ class ConferenceController extends \BaseController {
 		return Redirect::action('ConferenceController@showAuthorSourcingPage', array('paperid' =>$paper2));
 	}
 
+	/**
+	 * @deprecated
+	 *
+	 *  Dismisses Paper
+	 * @param  int $paper1
+	 * @param  int $paper2
+	 * @return Response
+	 */
 	public function dismiss($paper1, $paper2) {
 		$feedback = new AuthorFeedback;
 		$feedback->paper1_id = $paper1;

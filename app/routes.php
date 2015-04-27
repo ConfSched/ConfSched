@@ -13,7 +13,14 @@
 
 Route::get('/', 'ConferenceController@getIndex');
 
+/**
+ * Install
+ */
 Route::post('processintall', 'ConferenceController@processInstall');
+
+/**
+ * Registration
+ */
 
 Route::get('register', 'UserController@register');
 Route::post('register', 'UserController@processRegister');
@@ -66,7 +73,6 @@ Route::group(['prefix' => 'authorsourcing'], function() {
  * Schedule
  */
 
-
 Route::get('populateauthors', 'ConferenceController@populateAuthorsTable');
 Route::get('populatepapersauthors', 'ConferenceController@populatePapersAuthorsTable');
 
@@ -90,62 +96,11 @@ Route::get('deleteSession/{id}', 'ConferenceController@removeSession');
 Route::get('swap/{paper1}/{paper2}', 'ConferenceController@swap');
 Route::post('addrooms', 'ConferenceController@addRooms');
 
+Route::get('generateSchedule', 'ConferenceController@generateSchedule');
 
-
-Route::get('clearschedule', function() {
-	Sessions::truncate();
-	SessionPaper::truncate();
-});
-Route::get('populateschedule', function() {
-
-	// Sessions::truncate();
-	// SessionPaper::truncate();
-
-	// $papers = Paper::where('accepted', 'Accept')->get();
-	// var_dump($papers);
-	// $rooms = Room::all();
-
-	// $session = new Sessions;
-	// $session->start = Date::parse('January 10, 2015 10:30 AM');
-	// $session->end = Date::parse('January 10, 2015 12:00 PM');
-	// $session->room_id = $rooms->random()->id;
-	// $session->save();
-
-	// $session2 = new Sessions;
-	// $session2->start = Date::parse('January 10, 2015 1:30 AM');
-	// $session2->end = Date::parse('January 10, 2015 3:00 PM');
-	// $session2->room_id = $rooms->random()->id;
-	// $session2->save();
-
-	// $session3 = new Sessions;
-	// $session3->start = Date::parse('January 11, 2015 10:00 AM');
-	// $session3->end = Date::parse('January 11, 2015 12:00 PM');
-	// $session3->room_id = $rooms->random()->id;
-	// $session3->save();
-
-	// $session4 = new Sessions;
-	// $session4->start = Date::parse('January 11, 2015 2:00 AM');
-	// $session4->end = Date::parse('January 11, 2015 3:30 PM');
-	// $session4->room_id = $rooms->random()->id;
-	// $session4->save();
-
-	// $sessions = Sessions::all();
-
-	// foreach($papers as $paper) {
-	// 	$sessionpaper = new SessionPaper;
-	// 	$sessionpaper->session_id = $sessions->random()->id;
-	// 	$sessionpaper->paper_id = $paper->paperid;
-	// 	$sessionpaper->save();
-	// }
-
-	// // $sessionpaper = new SessionPaper;
-	// // $sessionpaper->session_id = $session->id;
-	// // $sessionpaper->paper_id = $papers->random()->paperid;
-	// // $sessionpaper->save();
-
-	// return Redirect::action('ConferenceController@showSchedulePage');
-
-});
+/**
+ * Dashboard
+ */
 
 Route::get('details/edit', 'ConferenceController@getEditDetails');
 Route::post('details/edit', 'ConferenceController@postEditDetails');
@@ -158,4 +113,4 @@ Route::get('finishauthorsourcing', 'ConferenceController@finalizeAuthorSourcing'
 Route::get('startschedule', 'ConferenceController@startSchedule');
 Route::get('startpreplanning', 'ConferenceController@startPreplanning');
 
-Route::get('generateSchedule', 'ConferenceController@generateSchedule');
+

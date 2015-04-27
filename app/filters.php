@@ -11,11 +11,15 @@
 |
 */
 
+/**
+ * Runs before page load
+ */
 App::before(function($request)
 {
 
 	$details = DB::table('details')->first();
 	if ($details === null) {
+		// Installation
 		Config::set('site.installation', true);
 	}
 	else {
@@ -26,14 +30,11 @@ App::before(function($request)
 		Config::set('site.conference_name', $name); // this is here for some legacy code that used config files
 		Config::set('site.conference_about', $about); // this is here for some legacy code that used config files
 	}
-
-	//$current_step = DB::table('progress')->where('completed', '<>', true)->orderBy('id')->first();
-
-
-	//Config::set('site.current_step', $current_step);
 });
 
-
+/**
+ * Runs after page load
+ */
 App::after(function($request, $response)
 {
 	//

@@ -5,13 +5,6 @@
 @endsection
 
 @section('content')
-	{{-- <h1>Conf Sched</h1>
-	<hr> --}}
-
-     {{--  <h1>CJD Conference 2015 </h1>
-      <p>January 11 - 14<br>
-      Roanoke College</p>
-      <hr> --}}
 
       @if (Config::get('site.installation') === true)
         <h1>Installation</h1>
