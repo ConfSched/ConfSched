@@ -65,6 +65,7 @@
                     <select name="permutation" id="permutation" class="form-control">
                       @foreach($permutations as $permutation)
                         <option>Permutation #{{ $permutation->permutation_id}}</option>
+                      @endforeach
                     </select>
                   </div>
               </form>
