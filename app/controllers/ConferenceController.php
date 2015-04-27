@@ -334,7 +334,6 @@ class ConferenceController extends \BaseController {
 			$sessions = Permutations::where('permutation_id', $permutation_id)->with('authors', 'sessions.authors')->get();
 			$conflicts = DB::table('conflicts')->where('permutation_id', $permutation_id)->first();
 			$conflicts = $conflicts->num_conflicts;
-			DBug::DBug($conflicts); die();
 		}
 		else {
 			$sessions = null;

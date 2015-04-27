@@ -59,7 +59,7 @@
 	@else
             {{-- DBug::DBug($sessions->toArray()); --}}
             <div class="row">
-              <h3>Num Conflicts: {{ $conficts }}</h3>
+              <h3>Num Conflicts: {{ $conflicts }}</h3>
 
               <?php $i = 0; ?>
               @foreach($sessions as $x)
