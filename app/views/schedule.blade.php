@@ -61,14 +61,14 @@
             $(function() {
               $('#permutation').on('change', function() {
                 console.log('changed');
-                $(this).parent('form').submit();
+                $(this).parents('form').submit();
               });
             });
           </script>
 
           <div class="row">
             <div class="col-xs-12 col-md-6">
-              <form class="form" id="permutations_form" method="GET">
+              <form method="GET">
                   <div class="form-group">
                     <label for="permutation">Permutation:</label>
                     <select name="permutation" id="permutation" class="form-control">
