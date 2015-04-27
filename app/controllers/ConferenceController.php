@@ -339,7 +339,7 @@ class ConferenceController extends \BaseController {
 			$sessions = null;
 			$conflicts = null;
 		}
-		return View::make('schedule', compact('rooms', 'sessions', 'conflicts'));
+		return View::make('schedule', compact('rooms', 'sessions', 'conflicts', 'permutations'));
 	}
 
 	public function showAddRoomsPage() {
