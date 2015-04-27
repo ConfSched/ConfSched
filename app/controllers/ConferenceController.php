@@ -801,7 +801,7 @@ class ConferenceController extends \BaseController {
 		var_dump(shell_exec('/home/cjdresearch/Scheduler/simulated'));
 		echo 'done';
 
-		return Redirect::action('ConferenceController@showSchedulePage');
+		//return Redirect::action('ConferenceController@showSchedulePage');
 	}
 
 }
