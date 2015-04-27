@@ -801,9 +801,9 @@ class ConferenceController extends \BaseController {
 		set_time_limit(0);
 		error_reporting(E_ALL);
 		ini_set('display_errors', 1);
-		echo shell_exec(Config::get('site.scheduler_cmd'));
+		shell_exec(Config::get('site.scheduler_cmd'));
 
-		//return Redirect::action('ConferenceController@showSchedulePage');
+		return Redirect::action('ConferenceController@showSchedulePage');
 	}
 
 }
