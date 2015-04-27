@@ -1,0 +1,172 @@
+## Install Guide
+
+### About
+This is a webapp that contains a combination of technologies. First is a Laravel 4.2 webapp. Second is an OpenConf webapp. You can find more information about Laravel 4.2 [here](http://laravel.com/docs/4.2). You can find more information about OpenConf [here](http://www.openconf.com/support/).
+
+### Installation
+
+You will need the following dependencies:
+
+* [GCC](https://gcc.gnu.org/)
+* [PHP 5.4 or later](https://php.net/)
+* [MySQL](https://www.mysql.com/)
+* [Apache](https://httpd.apache.org/)
+* [Git](http://git-scm.com/downloads)
+* [Composer](https://getcomposer.org/download/)
+* [NodeJS with npm](https://nodejs.org)
+* [Ruby](https://www.ruby-lang.org/en/downloads/)
+* [Bower](http://bower.io/#install-bower)
+
+You can follow [this guide](https://www.digitalocean.com/community/tutorials/how-to-install-linux-apache-mysql-php-lamp-stack-on-ubuntu-14-04) to get a LAMP stack consisting of Ubuntu 14.04, Apache, MySQL, and PHP. Development was done using a LAMP stack so this is the recommended setup.
+
+You can follow [this guide](https://www.digitalocean.com/community/tutorials/how-to-install-node-js-on-an-ubuntu-14-04-server) to install NodeJS and npm on Ubuntu 14.04.
+
+To install bower, we use npm. We recommend to install it globally. To do so, run the following:
+
+<code>npm install -g bower</code>
+
+After installing bower, you may run into an issue where you get the following error when running bower:
+
+<code>/usr/bin/env: node: No such file or directory</code>
+
+If you get this error, installing nodejs-legacy will provide a fix. On Ubuntu 14.04, we were able to solve this by running:
+
+<code>sudo apt-get install nodejs-legacy</code>
+
+Next, install sass.
+
+<code>gem install sass</code>
+
+Finally, install grunt.
+
+<code>npm install -g grunt-cli</code>
+
+Once you have all the dependencies installed, you can start the installation process.
+
+Create the database for the ConfSched app. We named the database <code>confsched</code> but you may name it whatever you like.
+
+<code>create database confsched;</code>
+
+After the database has been created, run the following:
+
+<code>git clone https://github.com/ConfSched/ConfSched.git</code>
+
+Switch to the newly cloned project.
+
+<code>cd ConfSched</code>
+
+You'll need to create the <code>.env.php</code> file. This file will contain sensitive information such as passwords. It is configured in the <code>.gitignore</code> file to not be tracked by Git. Your <code>.env.php</code> file should be in the root folder of your project. 
+
+You can find documentation on <code>.env.php</code> [here](http://laravel.com/docs/4.2/configuration#protecting-sensitive-configuration). 
+
+Here is an example of what your <code>.env.php</code> file should look like:
+
+```php
+<?php
+    return [
+        'db_username' => '<username>', // username for your db
+        'db_password' => '<password>', // password for your db
+        'db_name' => '<db_name>', // name for your db
+        'db_openconf_username' => '<username>', // openconf's db username
+        'db_openconf_password' => '<password>', // openconf's db password
+        'db_openconf_name' => '<db_name>' // openconf's db name
+    ];
+?>
+```
+
+Next, you need to run composer update to grab all the dependencies.
+
+<code>composer update</code>
+
+Depending on your composer installation, you might need to use composer.phar instead:
+
+<code>sudo composer.phar update</code>
+
+Now we'll create the tables for the database. To do so, we'll use Laravel's Migrations. Run the following command:
+
+<code>sudo php artisan migrate</code>
+
+Download OpenConf at [http://www.openconf.com/download/](http://www.openconf.com/download/). Follow the installation instructions for OpenConf [here](http://www.openconf.com/documentation/install.php).
+
+This step is optional. If you don't care about the public in the URL, you may skip this. We now need to configure Apache. The file structure of a Laravel application includes a public folder. That is the only folder we want publicly accessible. We don't want Apache to serve up the other folders. In order to achieve this, we take advantage of virtual hosts. We want to create a virtual host that will point to the path to our public folder. The actual implementation will vary from version to version in Apache.
+
+[Here](http://ulyssesonline.com/2014/07/24/install-laravel-4-2-on-ubuntu-server-14-04-lts/) is a reference on setting up Larave 4.2 for an Apache server on Ubuntu Server 14.04 LTS.
+
+Please note: you will need to have the <code>php-mcrypt</code> extension installed in order to use Laravel.
+
+Next step is to grab all the front end dependencies. For this, we use Grunt and Bower.
+
+<code>npm install</code>
+
+This installs Grunt which we use to automate the build process for our front end code.
+
+<code>bower install boostrap-sass</code>
+
+<code>bower install font-awesome</code>
+
+<code>bower install jquery</code>
+
+This grabs all of our dependencies through bower.
+
+<code>grunt copy</code>
+
+<code>grunt sass</code>
+
+<code>grunt concat</code>
+
+<code>grunt uglify</code>
+
+This will run our build process that combines all css and js into a single css and js file.
+
+If you ever want to modify the Sass or Javascript, you can find these files in the <code>app/assets</code> folder. You'll need to rebuild the code after every change. To make this easier, you can take advantage of Grunt and run the following for autobuild:
+
+<code>grunt</code>
+
+This will listen for any changes and rebuild upon a change.
+
+Open up <code>app/config/site.php</code> and edit the following line to set the url to your OpenConf installation:
+
+<code>'openconf_url' => 'http://path/to/openconf',</code>
+
+To install the C++ back end, navigate to wherever you want to install it (can be anywhere) and run:
+
+<code>git clone https://github.com/ConfSched/Scheduler.git</code>
+
+Next go into the newly created folder,
+
+<code>cd Scheduler</code>
+
+Create a new file named <code>config.h</code> and set the following constants:
+
+```c++
+#ifndef INCLUDED_CONFIG
+#define INCLUDED_CONFIG
+
+#define serverAddress "localhost"
+#define username "<username>"
+#define password "<password>"
+#define dbName "confsched"
+
+#endif
+```
+You can change these values to fit whatever you made them when you set up the confsched database.
+
+Next, run:
+
+<code>sudo apt-get install libmysqlclient-dev</code>
+
+<code>sudo apt-get install libsqlite3-dev</code>
+
+<code>make</code>
+
+Now you're good to go!
+
+Before deploying live, be sure to edit <code>app/config/app.php</code> and set <code>'debug' => 'false'</code>.
+
+Please note: you may run into permission issues where you only get a white screen with Laravel. This is typically caused by the app/storage folder not being writeable by the web server. For more information on this error, see [this](http://stackoverflow.com/questions/20678360/laravel-blank-white-screen).
+
+We were able to fix the permissions issue by running:
+
+<code>sudo chmod -R 777 app/storage</code>
+
+
