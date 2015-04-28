@@ -105,11 +105,11 @@ This step is optional. If you don't care about the public in the URL, you may sk
 
 Please note: you will need to have the <code>php-mcrypt</code> extension installed in order to use Laravel.
 
-Next step is to grab all the front end dependencies. For this, we use Grunt and Bower.
+Next step is to grab all the front end dependencies. For this, we use Grunt and Bower. Run the following in your ConfSched directory:
 
 <code>npm install</code>
 
-This installs Grunt which we use to automate the build process for our front end code.
+This installs Grunt which we use to automate the build process for our front end code. Again, run this in your ConfSched directory:
 
 <code>bower install boostrap-sass</code>
 
@@ -117,7 +117,7 @@ This installs Grunt which we use to automate the build process for our front end
 
 <code>bower install jquery</code>
 
-This is the build process. This grabs all of our dependencies through bower. So you'll need to run the following:
+This is the build process. This grabs all of our dependencies through bower. So you'll need to run the following in your ConfSched directory:
 
 <code>grunt copy</code>
 
@@ -164,17 +164,41 @@ Next, run this in your Scheduler directory:
 
 <code>make</code>
 
-Last you need to edit <code>app/config/site.php</code> to update the <code>Scheduler_cmd</code> constant to be the command to run the simulator program.
+Last you need to edit <code>app/config/site.php</code> in your ConfSched directory to update the <code>Scheduler_cmd</code> constant to be the command to run the simulator program.
 
 Now you're good to go!
 
-Before deploying live, be sure to edit <code>app/config/app.php</code> (in your ConfSched folder) and set <code>'debug' => 'false'</code>.
+Before deploying live, be sure to edit <code>app/config/app.php</code> (in your ConfSched directory) and set <code>'debug' => 'false'</code>.
 
 Please note: you may run into permission issues where you only get a white screen with Laravel. This is typically caused by the app/storage folder not being writeable by the web server. For more information on this error, see [this](http://stackoverflow.com/questions/20678360/laravel-blank-white-screen).
 
 ## About ConfSched
 
 ConfSched is an application that will help generate schedules for academic conferences. It can be broken up into three different technologies. First is OpenConf open source academic conference preplanning web application. Second is ConfSched web application. Third is a C++ application. These three technologies combine to create ConfSched.
+
+### File Layout
+
+The Webapp file layout is as follows:
+
+ConfSched
+    - app
+        - assets (This is where development javascript and stylesheets go)
+            - javascripts
+            - stylesheets
+        - config (This is where all configuration files go)
+        - controllers (This is where all controllers will be)
+        - database
+        - models (All models go in here)
+        - views (All views go here)
+        - filters.php (This is where filters go)
+        - routes.php (This is where routes go)
+    - bower_components (Vendor folder for bower)
+    - docs (All documentation is here)
+    - node_modules (Vendor folder for node)
+    - public (publicly facing files would go here)
+    -vendor (all vendor files go here)
+
+This follows the Laravel convention.
 
 ### Workflow
 

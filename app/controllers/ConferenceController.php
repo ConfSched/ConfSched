@@ -310,6 +310,10 @@ class ConferenceController extends \BaseController {
 		return Redirect::action('ConferenceController@showAuthorSourcingPage', array('paperid' =>$paper2));
 	}
 
+	/**
+	 * Shows schedule page
+	 * @return Response
+	 */
 	public function showSchedulePage() {
 		$rooms = Room::all();
 		$permutations = Permutations::distinct()->select('permutation_id')->orderBy('permutation_id')->get();
@@ -326,10 +330,18 @@ class ConferenceController extends \BaseController {
 		return View::make('schedule', compact('rooms', 'sessions', 'conflicts', 'permutations'));
 	}
 
+	/**
+	 * Show Add rooms page
+	 * @return Response
+	 */
 	public function showAddRoomsPage() {
 		return View::make('addrooms');
 	}
 
+	/**
+	 * Processes add rooms
+	 * @return  Response
+	 */
 	public function addRooms() {
 
 		$results = Excel::load(Input::file('file')->getRealPath(), function($reader) {
@@ -357,6 +369,12 @@ class ConferenceController extends \BaseController {
 
 	}
 
+	/**
+	 * Swaps two papers in sessions_papers
+	 * @param  int $paper1
+	 * @param  [type] $paper2 [description]
+	 * @return [type]         [description]
+	 */
 	public function swap($paper1, $paper2) {
 		$sessionpaper1 = SessionPaper::where('paper_id', $paper1)->first();
 		$sessionpaper2 = SessionPaper::where('paper_id', $paper2)->first();
@@ -370,10 +388,10 @@ class ConferenceController extends \BaseController {
 		return Redirect::action('ConferenceController@showSchedulePage');
 	}
 
-	public function showaddConstraintsPage() {
-
-	}
-
+	/**
+	 * populates the authors table
+	 * @return Response
+	 */
 	public function populateAuthorsTable() {
 		Authors::truncate();
 
@@ -390,17 +408,8 @@ class ConferenceController extends \BaseController {
 	}
 
 	public function showSessionsPage() {
-		//$sessions = Sessions::orderBy('start')->get();
 
 		$dates = Sessions::distinct()->select(DB::raw('CAST(start AS DATE) as date'))->get();
-
-		//$sessions = Sessions::groupBy(DB::raw('CAST(start AS DATE)'))->get();
-		//$debug = App::make('DBug');
-		//var_dump($debug);
-		//DBug::DBug($sessions->toArray());
-		//var_dump($sessions->toArray());
-		//die();
-
 
 		return View::make('sessions', compact('dates'));
 	}
@@ -545,11 +554,6 @@ class ConferenceController extends \BaseController {
 					$paperauthor->author_id = Input::get('author1');
 					$paperauthor->save();
 				}
-
-				// foreach(AuthorFeedback::where('user_id', $author)->get() as $authorfeedback) {
-				// 	$authorfeedback->user_id = Input::get('author1');
-				// 	$authorfeedback->save();
-				// }
 
 				foreach(AuthorSessionConstraint::where('author_id', $author)->get() as $authorsession) {
 					$authorsession->author_id = Input::get('author1');
